@@ -10,7 +10,7 @@ function Hero() {
           <span className="hero-para">Organise Your Life , &</span>
           <span className="hero-para2">
             Better Life is best.
-            <Link to="/homepage">
+            <Link to="/Home">
               <button className="btn btn-success">Start Now </button>
             </Link>
           </span>

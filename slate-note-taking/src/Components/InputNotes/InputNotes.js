@@ -27,6 +27,7 @@ function InputNotes() {
           <input
             type="text"
             name="name"
+            required
             class="navigation__input"
             placeholder="notes Title....!"
             onChange={(e) =>
@@ -42,6 +43,7 @@ function InputNotes() {
               type="radio"
               name="priority"
               value="top"
+              required
               checked={priorityRadioBoxValue === "top"}
               onChange={(e) =>
                 notesTakingFn({
@@ -55,6 +57,7 @@ function InputNotes() {
               type="radio"
               name="priority"
               value="medium"
+              required
               checked={priorityRadioBoxValue === "medium"}
               onChange={(e) =>
                 notesTakingFn({
@@ -68,6 +71,7 @@ function InputNotes() {
               type="radio"
               name="priority"
               value="low"
+              required
               checked={priorityRadioBoxValue === "low"}
               onChange={(e) =>
                 notesTakingFn({
@@ -83,6 +87,7 @@ function InputNotes() {
             <input
               type="radio"
               value="food"
+              required
               name="label"
               checked={labelRadioBoxValue === "food"}
               onChange={(e) =>
@@ -96,6 +101,7 @@ function InputNotes() {
             <input
               type="radio"
               value="home"
+              required
               name="label"
               checked={labelRadioBoxValue === "home"}
               onChange={(e) =>
@@ -109,6 +115,7 @@ function InputNotes() {
             <input
               type="radio"
               name="label"
+              required
               value="office"
               checked={labelRadioBoxValue === "office"}
               onChange={(e) =>

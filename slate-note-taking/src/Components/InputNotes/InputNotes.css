@@ -1,0 +1,97 @@
+.notes-container {
+  height: 21rem;
+  width: 30%;
+  border: 2px solid red;
+  text-align: center;
+  margin-top: 8rem;
+
+  margin-left: 40%;
+  border-radius: 0.3rem;
+}
+
+.rte-icons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: black;
+  cursor: pointer;
+  margin: 1rem;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-direction: column;
+  margin: 1rem;
+}
+input[type="radio"] {
+  border: 0px;
+  width: 10%;
+  height: 0.9rem;
+  margin: 0.5rem;
+  display: block;
+}
+
+input[type="text"] {
+  padding: 1rem;
+  height: 1rem;
+}
+.ql-container.ql-snow {
+  width: 50vh;
+  font-size: 1rem;
+  height: auto;
+}
+
+.ql-toolbar.ql-snow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+label.label-radio-box {
+  height: 2rem;
+  width: 90%;
+  padding: 1rem;
+  margin: 1rem 1rem 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  border-radius: 0.2rem;
+}
+label.label1-radio-box {
+  height: 2rem;
+  width: 90%;
+  padding: 1rem;
+  margin: 2rem;
+  margin: 1rem 1rem 2rem 1rem;
+  margin-bottom: 0.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  border-radius: 0.2rem;
+}
+.color-pallete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+}
+input[type="color"] {
+  visibility: hidden;
+  cursor: pointer;
+  border: none;
+}
+.rte-icons1 {
+  font-size: 2rem;
+  cursor: pointer;
+}
+input[type="submit"].take-notes-btn {
+  width: 20%;
+  margin: 1rem;
+  text-align: center;
+}

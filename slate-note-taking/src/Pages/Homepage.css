@@ -10,3 +10,9 @@
   margin-top: 8rem;
   margin-left: 8rem;
 }
+.fnpointer {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  margin: 1rem;
+}

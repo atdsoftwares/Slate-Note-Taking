@@ -20,7 +20,14 @@ function Homepage() {
       <InputNotes />
       <div>
         {addToNotes.length <= 0 ? (
-          <h1 className="header-text"> No notes to display </h1>
+          <h1 className="header-text">
+            {" "}
+            No notes to display from
+            <span onClick={toggleNotes} className="fnpointer">
+              {" "}
+              here{" "}
+            </span>
+          </h1>
         ) : (
           <div className="notes-data-container">
             {addToNotes.map((notes) => (

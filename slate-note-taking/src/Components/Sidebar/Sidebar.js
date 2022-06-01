@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNoteTakingContext } from "../Context/NotetakingContext";
 
 import "./Sidebar.css";
 function Sidebar() {
+  const { notesTakingFn, notesModal, toggleNotes } = useNoteTakingContext();
+
   return (
     <div>
       <aside className="aside">
@@ -42,7 +45,11 @@ function Sidebar() {
         </div>
         <div className="history">
           {/* <Link to="/history"> */}
-          <span className="material-icons sidebarmi" title="History">
+          <span
+            className="material-icons sidebarmi"
+            title="History"
+            onClick={toggleNotes}
+          >
             note_add
           </span>{" "}
           {/* </Link> */}

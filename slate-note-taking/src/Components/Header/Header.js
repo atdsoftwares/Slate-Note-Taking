@@ -7,9 +7,9 @@ function Header() {
     <div>
       <nav class="navigation-menu">
         <div class="navigation__left">
-          {/* <Link to="/"> */}
-          <div class="navigation__logo">Agri UI</div>
-          {/* </Link> */}
+          <Link to="/">
+            <div class="navigation__logo">Agri UI</div>
+          </Link>
         </div>
         <input
           type="search"

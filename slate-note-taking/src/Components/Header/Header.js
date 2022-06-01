@@ -8,7 +8,7 @@ function Header() {
       <nav class="navigation-menu">
         <div class="navigation__left">
           <Link to="/">
-            <div class="navigation__logo">Agri UI</div>
+            <div class="navigation__logo">Slate Notes</div>
           </Link>
         </div>
         <input

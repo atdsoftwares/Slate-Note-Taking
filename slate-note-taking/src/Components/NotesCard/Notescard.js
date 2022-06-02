@@ -12,10 +12,13 @@ function Notescard({ notesData }) {
   } = notesData[0];
 
   return (
-    <div className="notes-data-container">
+    <div style={{ margin: "0.5rem" }}>
       <div className="notes-card" style={{ backgroundColor: notesBgColor }}>
         <h2> {inputTextTitleValue}</h2>
-        <p> {textareaBoxValue} </p>
+        <div
+          dangerouslySetInnerHTML={{ __html: textareaBoxValue }}
+          className="title"
+        />
 
         <div className="chips-container">
           <span className="material-icons notesmi chips">

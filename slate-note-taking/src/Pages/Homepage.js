@@ -29,7 +29,7 @@ function Homepage() {
             </span>
           </h1>
         ) : (
-          <div className="notes-data-container">
+          <div className="notes-container">
             {addToNotes.map((notes) => (
               <Notescard notesData={notes} key={notes._id} />
             ))}

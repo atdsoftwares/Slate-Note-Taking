@@ -18,7 +18,7 @@ function InputNotes() {
 
   return (
     <div
-      className="notes-container"
+      className="notes1-container"
       style={{ backgroundColor: notesBgColor, display: notesModal }}
       defaultValue="#FFFF"
     >

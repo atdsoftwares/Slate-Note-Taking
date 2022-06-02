@@ -21,6 +21,8 @@ function NotetakingContext({ children }) {
         return { ...state, priorityRadioBoxValue: action.payload };
       case "LABELRADIOBOXVALUE":
         return { ...state, labelRadioBoxValue: action.payload };
+      case "LABELINPUTBOXVALUE":
+        return { ...state, labelInputBoxValue: action.payload };
       case "TEXTAREABOXVALUE":
         return { ...state, textareaBoxValue: action.payload };
       case "ADDTONOTES":
@@ -52,6 +54,7 @@ function NotetakingContext({ children }) {
     notesBgColor: "",
     notesModal: "none",
     noteCreationTime: "",
+    labelInputBoxValue: "",
   });
 
   const {
@@ -62,10 +65,15 @@ function NotetakingContext({ children }) {
     labelRadioBoxValue,
     notesBgColor,
     notesModal,
+    labelInputBoxValue,
   } = state;
   console.log(
-    "🚀 ~ file: NotetakingContext.js ~ line 54 ~ NotetakingContext ~ addToNotes",
-    noteCreationTime
+    "🚀 ~ file: NotetakingContext.js ~ line 70 ~ NotetakingContext ~ addToNotes",
+    addToNotes
+  );
+  console.log(
+    "🚀 ~ file: NotetakingContext.js ~ line 70 ~ NotetakingContext ~ labelInputBoxValue",
+    labelInputBoxValue
   );
 
   // get notes from Db
@@ -93,7 +101,8 @@ function NotetakingContext({ children }) {
         _id: uuid(),
         inputTextTitleValue,
         priorityRadioBoxValue,
-        labelRadioBoxValue,
+        // labelRadioBoxValue,
+        labelInputBoxValue,
         textareaBoxValue,
         notesBgColor,
         noteCreationTime,
@@ -147,6 +156,7 @@ function NotetakingContext({ children }) {
           notesBgColor,
           notesModal,
           toggleNotes,
+          labelInputBoxValue,
         }}
       >
         {children}

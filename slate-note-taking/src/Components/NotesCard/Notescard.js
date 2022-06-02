@@ -9,6 +9,7 @@ function Notescard({ notesData }) {
     textareaBoxValue,
     notesBgColor,
     noteCreationTime,
+    labelInputBoxValue,
   } = notesData[0];
 
   return (
@@ -23,7 +24,7 @@ function Notescard({ notesData }) {
         <div className="chips-container">
           <span className="material-icons notesmi chips">
             label
-            <span className="label-text"> {labelRadioBoxValue}</span>
+            <span className="label-text"> {labelInputBoxValue}</span>
           </span>
         </div>
         <div className="chips-container">

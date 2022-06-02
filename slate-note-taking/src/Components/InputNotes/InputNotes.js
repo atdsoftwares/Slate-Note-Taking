@@ -83,7 +83,7 @@ function InputNotes() {
               />
               Low{" "}
             </label>
-            <label className="label1-radio-box">
+            {/* <label className="label1-radio-box">
               Labels
               <input
                 type="radio"
@@ -127,7 +127,20 @@ function InputNotes() {
                 }
               />{" "}
               Office
-            </label>
+            </label> */}
+            <input
+              type="text"
+              name="name"
+              required
+              class="navigation__input"
+              placeholder="add labels....!"
+              onChange={(e) =>
+                notesTakingFn({
+                  type: "LABELINPUTBOXVALUE",
+                  payload: e.target.value,
+                })
+              }
+            />
             <div className="rte-icons">
               <RTEEditor />
             </div>

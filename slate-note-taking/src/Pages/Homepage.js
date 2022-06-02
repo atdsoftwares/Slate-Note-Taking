@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import { useNoteTakingContext } from "../Components/Context/NotetakingContext";
 import Footer from "../Components/Footer/Footer";
 import Header from "../Components/Header/Header";
+
 import InputNotes from "../Components/InputNotes/InputNotes";
+
 import Notescard from "../Components/NotesCard/Notescard";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import "./Homepage.css";

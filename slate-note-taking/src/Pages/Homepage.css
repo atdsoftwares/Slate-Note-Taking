@@ -1,0 +1,19 @@
+.notes-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 5rem;
+  margin-left: 8rem;
+  margin-right: 2rem;
+  overflow: auto;
+}
+.header-text {
+  margin-top: 8rem;
+  margin-left: 8rem;
+}
+.fnpointer {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  margin: 1rem;
+}

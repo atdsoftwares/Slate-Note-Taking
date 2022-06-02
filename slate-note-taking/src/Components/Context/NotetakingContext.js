@@ -29,15 +29,15 @@ function NotetakingContext({ children }) {
         return { ...state, notesBgColor: action.payload };
       case "NOTETAKINGMODAL":
         return { ...state, notesModal: action.payload };
-      case "NOTEVREATEDAT":
+      case "NOTECREATEDAT":
         return { ...state, noteCreationTime: action.payload };
 
       default:
         return state;
     }
   }
-  const noteCreatedAt = new Date();
 
+  const noteCreatedAt = new Date();
   const noteCreationTime = new Date(noteCreatedAt).toLocaleString("en-US", {
     timeZone: "Asia/Kolkata",
   });
@@ -53,11 +53,6 @@ function NotetakingContext({ children }) {
     notesModal: "none",
     noteCreationTime: "",
   });
-
-  console.log(
-    "🚀 ~ file: NotetakingContext.js ~ line 52 ~ NotetakingContext ~ noteCreatedAt",
-    noteCreatedAt
-  );
 
   const {
     textareaBoxValue,
@@ -119,6 +114,13 @@ function NotetakingContext({ children }) {
     } catch (error) {
       console.log(`something went wrong`, error);
     }
+
+    notesTakingFn({ type: "INPUTTEXTTITLEVALUE", payload: "" });
+    notesTakingFn({ type: "PRIORITYRADIOBOXVALUE", payload: "" });
+    notesTakingFn({ type: "LABELRADIOBOXVALUE", payload: "" });
+    notesTakingFn({ type: "TEXTAREABOXVALUE", payload: "" });
+    notesTakingFn({ type: "NOTESBGCOLOR", payload: "" });
+    notesTakingFn({ type: "NOTETAKINGMODAL", payload: "none" });
   }
 
   function toggleNotes() {
@@ -143,7 +145,6 @@ function NotetakingContext({ children }) {
           addNotesintoDb,
           addToNotes,
           notesBgColor,
-
           notesModal,
           toggleNotes,
         }}

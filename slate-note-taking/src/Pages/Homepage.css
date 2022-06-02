@@ -1,10 +1,11 @@
-.notes-data-container {
+.notes-container {
   display: flex;
-  justify-content: space-evenly;
-  height: auto;
+  justify-content: space-between;
   flex-wrap: wrap;
-  margin-left: 4rem;
-  width: auto;
+  margin-top: 5rem;
+  margin-left: 8rem;
+  margin-right: 2rem;
+  overflow: auto;
 }
 .header-text {
   margin-top: 8rem;

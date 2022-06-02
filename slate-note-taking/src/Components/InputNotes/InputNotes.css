@@ -1,12 +1,17 @@
-.notes-container {
-  height: 21rem;
-  width: 30%;
-  border: 2px solid red;
+.notes1-container {
+  height: 45%;
+  width: 35%;
+  /* border: 2px solid red; */
   text-align: center;
-  margin-top: 8rem;
-
   margin-left: 40%;
-  border-radius: 0.3rem;
+  margin-top: 5rem;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  opacity: 0.8;
+  border-radius: 0.5rem;
+  box-shadow: 1px 5px 8px 5px rgba(0, 0, 0, 0.2);
 }
 
 .rte-icons {
@@ -94,4 +99,11 @@ input[type="submit"].take-notes-btn {
   width: 20%;
   margin: 1rem;
   text-align: center;
+  background-color: var(--sky-blue-color);
+  color: var(--white-color);
+  font-size: 1.2rem;
+  font-weight: 800;
+  border-radius: 0.2rem;
+  border: none;
+  box-shadow: 1px 1px 1px 1px black;
 }

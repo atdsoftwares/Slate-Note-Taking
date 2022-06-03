@@ -135,12 +135,20 @@ function NotetakingContext({ children }) {
   }
 
   const [getParams, setGetParams] = useState();
+  const [newData, setNewData] = useState([]);
+  console.log(
+    "🚀 ~ file: NotetakingContext.js ~ line 139 ~ NotetakingContext ~ newData",
+    newData
+  );
 
-  async function editData(_id) {
-    console.log(
-      "🚀 ~ file: NotetakingContext.js ~ line 132 ~ editData ~ _id",
-      _id
-    );
+  async function editData(getParams) {
+    const newData1 = getNotesData.find((elem) => {
+      return elem._id === getParams;
+    });
+    notesTakingFn({
+      type: "ADDTONOTES",
+      payload: newData1,
+    });
   }
 
   return (
@@ -162,6 +170,7 @@ function NotetakingContext({ children }) {
           getNotesDataFromAPIFn,
           editData,
           setGetParams,
+          newData,
         }}
       >
         {children}

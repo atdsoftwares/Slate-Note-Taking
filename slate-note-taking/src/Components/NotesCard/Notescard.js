@@ -41,15 +41,16 @@ function Notescard({ notesData }) {
           </span>
         </div>
         <sub> created at : {noteCreationTime} </sub>
+
         <div className="action-icons">
-          <Link to={`/Edit/${_id}`}>
-            <span
-              className="material-icons notesmi"
-              onClick={() => editData(_id)}
-            >
-              edit{" "}
-            </span>
-          </Link>
+          {/* <Link to={`/Edit/${_id}`}> */}
+          <span
+            className="material-icons notesmi"
+            // onClick={() => editData(_id)}
+          >
+            edit{" "}
+          </span>
+          {/* </Link> */}
           <span
             className="material-icons notesmi"
             onClick={() => postNotesToTrashFn(_id, notesData)}

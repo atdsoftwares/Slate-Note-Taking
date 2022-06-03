@@ -11,10 +11,6 @@ function InputNotes() {
     notesBgColor,
     notesModal,
   } = useNoteTakingContext();
-  console.log(
-    "🚀 ~ file: InputNotes.js ~ line 14 ~ InputNotes ~ notesModal",
-    notesModal
-  );
 
   return (
     <div>
@@ -83,51 +79,6 @@ function InputNotes() {
               />
               Low{" "}
             </label>
-            {/* <label className="label1-radio-box">
-              Labels
-              <input
-                type="radio"
-                value="food"
-                required
-                name="label"
-                checked={labelRadioBoxValue === "food"}
-                onChange={(e) =>
-                  notesTakingFn({
-                    type: "LABELRADIOBOXVALUE",
-                    payload: e.target.value,
-                  })
-                }
-              />{" "}
-              Food
-              <input
-                type="radio"
-                value="home"
-                required
-                name="label"
-                checked={labelRadioBoxValue === "home"}
-                onChange={(e) =>
-                  notesTakingFn({
-                    type: "LABELRADIOBOXVALUE",
-                    payload: e.target.value,
-                  })
-                }
-              />{" "}
-              Home
-              <input
-                type="radio"
-                name="label"
-                required
-                value="office"
-                checked={labelRadioBoxValue === "office"}
-                onChange={(e) =>
-                  notesTakingFn({
-                    type: "LABELRADIOBOXVALUE",
-                    payload: e.target.value,
-                  })
-                }
-              />{" "}
-              Office
-            </label> */}
             <input
               type="text"
               name="name"

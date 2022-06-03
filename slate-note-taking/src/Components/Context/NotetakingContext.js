@@ -1,6 +1,13 @@
 import axios from "axios";
-import React, { createContext, useContext, useEffect, useReducer } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { v4 as uuid } from "uuid";
+import InputNotes from "../InputNotes/InputNotes";
 const noteTakingContext = createContext();
 export const useNoteTakingContext = () => useContext(noteTakingContext);
 
@@ -19,8 +26,6 @@ function NotetakingContext({ children }) {
         return { ...state, inputTextTitleValue: action.payload };
       case "PRIORITYRADIOBOXVALUE":
         return { ...state, priorityRadioBoxValue: action.payload };
-      case "LABELRADIOBOXVALUE":
-        return { ...state, labelRadioBoxValue: action.payload };
       case "LABELINPUTBOXVALUE":
         return { ...state, labelInputBoxValue: action.payload };
       case "TEXTAREABOXVALUE":
@@ -49,7 +54,6 @@ function NotetakingContext({ children }) {
     addToNotes: [],
     inputTextTitleValue: "",
     priorityRadioBoxValue: "",
-    labelRadioBoxValue: "",
     textareaBoxValue: "",
     notesBgColor: "",
     notesModal: "none",
@@ -66,15 +70,8 @@ function NotetakingContext({ children }) {
     notesBgColor,
     notesModal,
     labelInputBoxValue,
+    getNotesData,
   } = state;
-  console.log(
-    "🚀 ~ file: NotetakingContext.js ~ line 70 ~ NotetakingContext ~ addToNotes",
-    addToNotes
-  );
-  console.log(
-    "🚀 ~ file: NotetakingContext.js ~ line 70 ~ NotetakingContext ~ labelInputBoxValue",
-    labelInputBoxValue
-  );
 
   // get notes from Db
   async function getNotesDataFromAPIFn() {
@@ -96,18 +93,16 @@ function NotetakingContext({ children }) {
 
   async function addNotesintoDb(e) {
     e.preventDefault();
-    const note = [
-      {
-        _id: uuid(),
-        inputTextTitleValue,
-        priorityRadioBoxValue,
-        // labelRadioBoxValue,
-        labelInputBoxValue,
-        textareaBoxValue,
-        notesBgColor,
-        noteCreationTime,
-      },
-    ];
+    const note = {
+      _id: uuid(),
+      inputTextTitleValue,
+      priorityRadioBoxValue,
+      labelInputBoxValue,
+      textareaBoxValue,
+      notesBgColor,
+      noteCreationTime,
+    };
+
     try {
       await axios({
         method: "POST",
@@ -116,7 +111,7 @@ function NotetakingContext({ children }) {
         data: { note },
       }).then((response) =>
         notesTakingFn({
-          type: "ADDTONOTES",
+          type: "GETNOTESDATAFROMAPI",
           payload: response.data.notes,
         })
       );
@@ -126,7 +121,7 @@ function NotetakingContext({ children }) {
 
     notesTakingFn({ type: "INPUTTEXTTITLEVALUE", payload: "" });
     notesTakingFn({ type: "PRIORITYRADIOBOXVALUE", payload: "" });
-    notesTakingFn({ type: "LABELRADIOBOXVALUE", payload: "" });
+    notesTakingFn({ type: "LABELINPUTBOXVALUE", payload: "" });
     notesTakingFn({ type: "TEXTAREABOXVALUE", payload: "" });
     notesTakingFn({ type: "NOTESBGCOLOR", payload: "" });
     notesTakingFn({ type: "NOTETAKINGMODAL", payload: "none" });
@@ -138,9 +133,15 @@ function NotetakingContext({ children }) {
       payload: notesModal === "none" ? "block" : "none",
     });
   }
-  useEffect(() => {
-    getNotesDataFromAPIFn();
-  }, []);
+
+  const [getParams, setGetParams] = useState();
+
+  async function editData(_id) {
+    console.log(
+      "🚀 ~ file: NotetakingContext.js ~ line 132 ~ editData ~ _id",
+      _id
+    );
+  }
 
   return (
     <div>
@@ -157,6 +158,10 @@ function NotetakingContext({ children }) {
           notesModal,
           toggleNotes,
           labelInputBoxValue,
+          getNotesData,
+          getNotesDataFromAPIFn,
+          editData,
+          setGetParams,
         }}
       >
         {children}

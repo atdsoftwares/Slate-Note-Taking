@@ -1,11 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useArchiveContext } from "../Context/ArchiveNotesContext";
-import { useNoteTakingContext } from "../Context/NotetakingContext";
 import { useTrashNotesContext } from "../Context/TrashNotesContext";
-
 import "./Notescard.css";
-function Notescard({ notesData }) {
+function TrashNotesCard({ trashnotesdata }) {
   const {
     inputTextTitleValue,
     priorityRadioBoxValue,
@@ -14,10 +10,10 @@ function Notescard({ notesData }) {
     noteCreationTime,
     labelInputBoxValue,
     _id,
-  } = notesData;
-  const { postArchiveNotesFn } = useArchiveContext();
-  const { postNotesToTrashFn } = useTrashNotesContext();
-  const { editData } = useNoteTakingContext();
+  } = trashnotesdata;
+
+  const { deleteTrashedNotesFn, restoreTrashedNotesFn } =
+    useTrashNotesContext();
 
   return (
     <div style={{ margin: "0.5rem" }}>
@@ -41,32 +37,22 @@ function Notescard({ notesData }) {
           </span>
         </div>
         <sub> created at : {noteCreationTime} </sub>
-
         <div className="action-icons">
-          {/* <Link to={`/Edit/${_id}`}> */}
           <span
             className="material-icons notesmi"
-            // onClick={() => editData(_id)}
+            onClick={() => deleteTrashedNotesFn(_id)}
           >
-            edit{" "}
-          </span>
-          {/* </Link> */}
-          <span
-            className="material-icons notesmi"
-            onClick={() => postNotesToTrashFn(_id, notesData)}
-          >
-            delete{" "}
+            delete
           </span>
           <span
             className="material-icons notesmi"
-            onClick={() => postArchiveNotesFn(_id, notesData)}
+            onClick={() => restoreTrashedNotesFn(_id)}
           >
-            archive{" "}
+            restore_from_trash
           </span>
         </div>
       </div>
     </div>
   );
 }
-
-export default Notescard;
+export default TrashNotesCard;

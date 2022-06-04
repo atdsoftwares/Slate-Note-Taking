@@ -18,14 +18,6 @@ function Sidebar() {
           Home
         </div>
 
-        <div className="explore">
-          <Link to="/Labels">
-            <span className="material-icons sidebarmi" title="Explore">
-              label
-            </span>{" "}
-          </Link>
-          Label
-        </div>
         <div className="playlists">
           <Link to="/Archives">
             <span className="material-icons sidebarmi" title="Playlists">

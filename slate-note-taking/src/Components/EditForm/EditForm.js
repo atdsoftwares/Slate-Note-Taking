@@ -1,23 +1,42 @@
-import React, { useState } from "react";
+import React from "react";
+import { useParams } from "react-router-dom";
 import { useNoteTakingContext } from "../Context/NotetakingContext";
 import RTEEditor from "../Editor/RTEEditor";
-import "./InputNotes.css";
-function InputNotes() {
+import "./EditForm.css";
+function EditForm() {
+  const { setGetParams } = useNoteTakingContext();
+  const params = useParams();
+  setGetParams(params);
+
   const {
     notesTakingFn,
-    priorityRadioBoxValue,
-    labelRadioBoxValue,
+    // priorityRadioBoxValue,
+    // labelRadioBoxValue,
     addNotesintoDb,
-    notesBgColor,
-    notesModal,
+    // notesBgColor,
+    // notesModal,
+    addToNotes,
   } = useNoteTakingContext();
+  console.log(
+    "🚀 ~ file: EditForm.js ~ line 20 ~ EditForm ~ newData",
+    addToNotes
+  );
 
+  const {
+    inputTextTitleValue,
+    labelInputBoxValue,
+    noteCreationTime,
+    notesBgColor,
+    priorityRadioBoxValue,
+    textareaBoxValue,
+  } = addToNotes;
   return (
     <div>
       <div
         className="notes1-container"
-        style={{ backgroundColor: notesBgColor, display: notesModal }}
-        defaultValue="#FFFF"
+        style={{
+          backgroundColor: notesBgColor,
+        }}
       >
         <div className="form-container">
           <form onSubmit={addNotesintoDb}>
@@ -25,6 +44,7 @@ function InputNotes() {
               type="text"
               name="name"
               required
+              value={inputTextTitleValue}
               class="navigation__input"
               placeholder="notes Title....!"
               onChange={(e) =>
@@ -39,7 +59,7 @@ function InputNotes() {
               <input
                 type="radio"
                 name="priority"
-                value="top"
+                value={priorityRadioBoxValue}
                 required
                 checked={priorityRadioBoxValue === "top"}
                 onChange={(e) =>
@@ -53,7 +73,7 @@ function InputNotes() {
               <input
                 type="radio"
                 name="priority"
-                value="medium"
+                value={priorityRadioBoxValue}
                 required
                 checked={priorityRadioBoxValue === "medium"}
                 onChange={(e) =>
@@ -67,7 +87,7 @@ function InputNotes() {
               <input
                 type="radio"
                 name="priority"
-                value="low"
+                value={priorityRadioBoxValue}
                 required
                 checked={priorityRadioBoxValue === "low"}
                 onChange={(e) =>
@@ -82,6 +102,7 @@ function InputNotes() {
             <input
               type="text"
               name="name"
+              value={labelInputBoxValue}
               required
               class="navigation__input"
               placeholder="add labels....!"
@@ -93,7 +114,7 @@ function InputNotes() {
               }
             />
             <div className="rte-icons">
-              <RTEEditor />
+              <RTEEditor textareaBoxValue={textareaBoxValue} />
             </div>
 
             <div className="color-pallete">
@@ -120,4 +141,4 @@ function InputNotes() {
   );
 }
 
-export default InputNotes;
+export default EditForm;

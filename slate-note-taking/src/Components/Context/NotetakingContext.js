@@ -1,6 +1,13 @@
 import axios from "axios";
-import React, { createContext, useContext, useEffect, useReducer } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { v4 as uuid } from "uuid";
+import InputNotes from "../InputNotes/InputNotes";
 const noteTakingContext = createContext();
 export const useNoteTakingContext = () => useContext(noteTakingContext);
 
@@ -19,8 +26,8 @@ function NotetakingContext({ children }) {
         return { ...state, inputTextTitleValue: action.payload };
       case "PRIORITYRADIOBOXVALUE":
         return { ...state, priorityRadioBoxValue: action.payload };
-      case "LABELRADIOBOXVALUE":
-        return { ...state, labelRadioBoxValue: action.payload };
+      case "LABELINPUTBOXVALUE":
+        return { ...state, labelInputBoxValue: action.payload };
       case "TEXTAREABOXVALUE":
         return { ...state, textareaBoxValue: action.payload };
       case "ADDTONOTES":
@@ -47,11 +54,11 @@ function NotetakingContext({ children }) {
     addToNotes: [],
     inputTextTitleValue: "",
     priorityRadioBoxValue: "",
-    labelRadioBoxValue: "",
     textareaBoxValue: "",
     notesBgColor: "",
     notesModal: "none",
     noteCreationTime: "",
+    labelInputBoxValue: "",
   });
 
   const {
@@ -62,11 +69,9 @@ function NotetakingContext({ children }) {
     labelRadioBoxValue,
     notesBgColor,
     notesModal,
+    labelInputBoxValue,
+    getNotesData,
   } = state;
-  console.log(
-    "🚀 ~ file: NotetakingContext.js ~ line 54 ~ NotetakingContext ~ addToNotes",
-    noteCreationTime
-  );
 
   // get notes from Db
   async function getNotesDataFromAPIFn() {
@@ -88,17 +93,16 @@ function NotetakingContext({ children }) {
 
   async function addNotesintoDb(e) {
     e.preventDefault();
-    const note = [
-      {
-        _id: uuid(),
-        inputTextTitleValue,
-        priorityRadioBoxValue,
-        labelRadioBoxValue,
-        textareaBoxValue,
-        notesBgColor,
-        noteCreationTime,
-      },
-    ];
+    const note = {
+      _id: uuid(),
+      inputTextTitleValue,
+      priorityRadioBoxValue,
+      labelInputBoxValue,
+      textareaBoxValue,
+      notesBgColor,
+      noteCreationTime,
+    };
+
     try {
       await axios({
         method: "POST",
@@ -107,7 +111,7 @@ function NotetakingContext({ children }) {
         data: { note },
       }).then((response) =>
         notesTakingFn({
-          type: "ADDTONOTES",
+          type: "GETNOTESDATAFROMAPI",
           payload: response.data.notes,
         })
       );
@@ -117,7 +121,7 @@ function NotetakingContext({ children }) {
 
     notesTakingFn({ type: "INPUTTEXTTITLEVALUE", payload: "" });
     notesTakingFn({ type: "PRIORITYRADIOBOXVALUE", payload: "" });
-    notesTakingFn({ type: "LABELRADIOBOXVALUE", payload: "" });
+    notesTakingFn({ type: "LABELINPUTBOXVALUE", payload: "" });
     notesTakingFn({ type: "TEXTAREABOXVALUE", payload: "" });
     notesTakingFn({ type: "NOTESBGCOLOR", payload: "" });
     notesTakingFn({ type: "NOTETAKINGMODAL", payload: "none" });
@@ -129,9 +133,23 @@ function NotetakingContext({ children }) {
       payload: notesModal === "none" ? "block" : "none",
     });
   }
-  useEffect(() => {
-    getNotesDataFromAPIFn();
-  }, []);
+
+  const [getParams, setGetParams] = useState();
+  const [newData, setNewData] = useState([]);
+  console.log(
+    "🚀 ~ file: NotetakingContext.js ~ line 139 ~ NotetakingContext ~ newData",
+    newData
+  );
+
+  async function editData(getParams) {
+    const newData1 = getNotesData.find((elem) => {
+      return elem._id === getParams;
+    });
+    notesTakingFn({
+      type: "ADDTONOTES",
+      payload: newData1,
+    });
+  }
 
   return (
     <div>
@@ -147,6 +165,12 @@ function NotetakingContext({ children }) {
           notesBgColor,
           notesModal,
           toggleNotes,
+          labelInputBoxValue,
+          getNotesData,
+          getNotesDataFromAPIFn,
+          editData,
+          setGetParams,
+          newData,
         }}
       >
         {children}

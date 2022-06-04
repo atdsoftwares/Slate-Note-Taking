@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useNoteTakingContext } from "../Components/Context/NotetakingContext";
 import Footer from "../Components/Footer/Footer";
@@ -10,29 +10,31 @@ import Notescard from "../Components/NotesCard/Notescard";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import "./Homepage.css";
 function Homepage() {
-  const { addToNotes, toggleNotes } = useNoteTakingContext();
+  const { getNotesData, toggleNotes, getNotesDataFromAPIFn } =
+    useNoteTakingContext();
   console.log(
-    "🚀 ~ file: Homepage.js ~ line 11 ~ Homepage ~ addToNotes",
-    addToNotes.length
+    "🚀 ~ file: Homepage.js ~ line 14 ~ Homepage ~ getNotesData",
+    getNotesData
   );
+  useEffect(() => {
+    getNotesDataFromAPIFn();
+  }, []);
   return (
     <div>
       <Header />
       <Sidebar />
       <InputNotes />
       <div>
-        {addToNotes.length <= 0 ? (
+        {getNotesData.length <= 0 ? (
           <h1 className="header-text">
-            {" "}
-            No notes to display from
+            No notes to display in Homepage , add some from
             <span onClick={toggleNotes} className="fnpointer">
-              {" "}
-              here{" "}
+              here
             </span>
           </h1>
         ) : (
           <div className="notes-container">
-            {addToNotes.map((notes) => (
+            {getNotesData.map((notes) => (
               <Notescard notesData={notes} key={notes._id} />
             ))}
           </div>

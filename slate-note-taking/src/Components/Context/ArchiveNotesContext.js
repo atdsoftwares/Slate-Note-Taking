@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useReducer, useState } from "react";
+import Toast from "../Toast/Toast";
 import { useNoteTakingContext } from "./NotetakingContext";
 
 const archiveContext = createContext();
@@ -58,6 +59,7 @@ function ArchiveNotesContext({ children }) {
           payload: response.data.notes,
         })
       );
+      Toast({ type: "info", message: "note added to archive" });
     } catch (error) {
       console.log(`something went wrong`, error);
     }
@@ -77,6 +79,7 @@ function ArchiveNotesContext({ children }) {
           payload: response.data.archives,
         })
       );
+      Toast({ type: "info", message: "note deleted from archive" });
     } catch (error) {
       console.log(`something went wrong`, error);
     }
@@ -94,6 +97,10 @@ function ArchiveNotesContext({ children }) {
           payload: response.data.archives,
         })
       );
+      Toast({
+        type: "info",
+        message: "note restored from archive to homepage",
+      });
     } catch (error) {
       console.log(`something went wrong`, error);
     }

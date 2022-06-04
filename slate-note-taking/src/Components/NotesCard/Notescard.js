@@ -46,7 +46,7 @@ function Notescard({ notesData }) {
           {/* <Link to={`/Edit/${_id}`}> */}
           <span
             className="material-icons notesmi"
-            // onClick={() => editData(_id)}
+            onClick={() => editData(_id)}
           >
             edit{" "}
           </span>

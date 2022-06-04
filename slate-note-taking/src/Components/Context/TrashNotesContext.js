@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useReducer } from "react";
+import Toast from "../Toast/Toast";
 import { useNoteTakingContext } from "./NotetakingContext";
 
 const trashNotesContext = createContext();
@@ -58,6 +59,7 @@ function TrashNotesContext({ children }) {
           payload: response.data.notes,
         })
       );
+      Toast({ type: "info", message: "note added to trash" });
     } catch (error) {
       console.log(`something went wrong`, error);
     }
@@ -77,6 +79,7 @@ function TrashNotesContext({ children }) {
           payload: response.data.trash,
         })
       );
+      Toast({ type: "info", message: "note deleted from trash" });
     } catch (error) {
       console.log(`something went wrong`, error);
     }
@@ -94,6 +97,7 @@ function TrashNotesContext({ children }) {
           payload: response.data.trash,
         })
       );
+      Toast({ type: "info", message: "note restored from trash to homepage" });
     } catch (error) {
       console.log(`something went wrong`, error);
     }

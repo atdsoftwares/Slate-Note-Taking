@@ -1,20 +1,11 @@
 import axios from "axios";
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import React, { createContext, useContext, useReducer, useState } from "react";
 import { v4 as uuid } from "uuid";
-import InputNotes from "../InputNotes/InputNotes";
+import Toast from "../Toast/Toast";
+
 const noteTakingContext = createContext();
 export const useNoteTakingContext = () => useContext(noteTakingContext);
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIwMzA4ZDA3NC1iY2RkLTRjMTEtYmVkOS0wMzhhZWRhZmM0ZjciLCJlbWFpbCI6ImFkYXJzaGJhbGlrYUBnbWFpbC5jb20ifQ.yj4z6vXmZHq66VSH7-pQ9JoPjZR6WJcVgDKejj3vJfk";
-
-localStorage.setItem("token", token);
 function NotetakingContext({ children }) {
   function notesReducerFn(state, action) {
     switch (action.type) {
@@ -115,6 +106,7 @@ function NotetakingContext({ children }) {
           payload: response.data.notes,
         })
       );
+      Toast({ type: "info", message: "new note is added " });
     } catch (error) {
       console.log(`something went wrong`, error);
     }
@@ -136,19 +128,16 @@ function NotetakingContext({ children }) {
 
   const [getParams, setGetParams] = useState();
   const [newData, setNewData] = useState([]);
-  console.log(
-    "🚀 ~ file: NotetakingContext.js ~ line 139 ~ NotetakingContext ~ newData",
-    newData
-  );
 
   async function editData(getParams) {
-    const newData1 = getNotesData.find((elem) => {
-      return elem._id === getParams;
-    });
-    notesTakingFn({
-      type: "ADDTONOTES",
-      payload: newData1,
-    });
+    // const newData1 = getNotesData.find((elem) => {
+    //   return elem._id === getParams;
+    // });
+    // notesTakingFn({
+    //   type: "ADDTONOTES",
+    //   payload: newData1,
+    // });
+    Toast({ type: "info", message: "feature is under devlopment" });
   }
 
   return (

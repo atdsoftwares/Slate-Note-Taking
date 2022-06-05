@@ -49,7 +49,7 @@ function LoginSignupContext({ children }) {
       dispatch({ type: "LOGINDATA", payload: response.data.foundUser });
       localStorage.getItem(`token`, response.data.encodedToken);
       Toast({ type: "info", message: "logged in " });
-      navigate("/accounts");
+      navigate("/Home");
     } catch (error) {
       console.log(error);
     }

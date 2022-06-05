@@ -105,6 +105,7 @@ function EditForm() {
               <input
                 type="radio"
                 name="priority"
+                defaultValue="top"
                 value={priorityRadioBoxValue}
                 required
                 checked={priorityRadioBoxValue === "top"}
@@ -121,6 +122,7 @@ function EditForm() {
                 name="priority"
                 value={priorityRadioBoxValue}
                 required
+                defaultValue="medium"
                 checked={priorityRadioBoxValue === "medium"}
                 onChange={(e) =>
                   notesTakingFn({
@@ -133,6 +135,7 @@ function EditForm() {
               <input
                 type="radio"
                 name="priority"
+                defaultValue="low"
                 value={priorityRadioBoxValue}
                 required
                 checked={priorityRadioBoxValue === "low"}

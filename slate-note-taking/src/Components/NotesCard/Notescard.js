@@ -14,6 +14,7 @@ function Notescard({ notesData }) {
     noteCreationTime,
     labelInputBoxValue,
     _id,
+    noteUpdatedAt,
   } = notesData;
   const { postArchiveNotesFn } = useArchiveContext();
   const { postNotesToTrashFn } = useTrashNotesContext();
@@ -40,17 +41,29 @@ function Notescard({ notesData }) {
             <span className="label-text"> {priorityRadioBoxValue}</span>
           </span>
         </div>
-        <sub> created at : {noteCreationTime} </sub>
+        <div className="note-timing">
+          <sub> created at : {noteCreationTime} </sub>
+          <sub> updated at : {noteUpdatedAt} </sub>{" "}
+        </div>
 
         <div className="action-icons">
-          {/* <Link to={`/Edit/${_id}`}> */}
-          <span
-            className="material-icons notesmi"
-            onClick={() => editData(_id)}
-          >
-            edit{" "}
-          </span>
-          {/* </Link> */}
+          <Link to={`/Edit/${_id}`}>
+            <span
+              className="material-icons notesmi"
+              onClick={() =>
+                editData(
+                  _id,
+                  labelInputBoxValue,
+                  textareaBoxValue,
+                  priorityRadioBoxValue,
+                  inputTextTitleValue,
+                  notesBgColor
+                )
+              }
+            >
+              edit{" "}
+            </span>
+          </Link>
           <span
             className="material-icons notesmi"
             onClick={() => postNotesToTrashFn(_id, notesData)}

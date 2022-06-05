@@ -1,35 +1,80 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useNoteTakingContext } from "../Context/NotetakingContext";
+import { useEffect, useState } from "react";
 import RTEEditor from "../Editor/RTEEditor";
 import "./EditForm.css";
+import axios from "axios";
 function EditForm() {
-  const { setGetParams } = useNoteTakingContext();
-  const params = useParams();
-  setGetParams(params);
-
   const {
     notesTakingFn,
-    // priorityRadioBoxValue,
-    // labelRadioBoxValue,
-    addNotesintoDb,
-    // notesBgColor,
-    // notesModal,
-    addToNotes,
-  } = useNoteTakingContext();
-  console.log(
-    "🚀 ~ file: EditForm.js ~ line 20 ~ EditForm ~ newData",
-    addToNotes
-  );
-
-  const {
-    inputTextTitleValue,
-    labelInputBoxValue,
-    noteCreationTime,
-    notesBgColor,
     priorityRadioBoxValue,
+    notesBgColor,
     textareaBoxValue,
-  } = addToNotes;
+    labelInputBoxValue,
+    inputTextTitleValue,
+  } = useNoteTakingContext();
+
+  const noteCreatedAt = new Date();
+  const noteUpdatedAt = new Date(noteCreatedAt).toLocaleString("en-US", {
+    timeZone: "Asia/Kolkata",
+  });
+  const [_id, setId] = useState();
+  const navigate = useNavigate();
+  async function updateNotesDataFn(e) {
+    e.preventDefault();
+
+    try {
+      const response = await axios({
+        method: "POST",
+        url: `/api/notes/${_id}`,
+        headers: { authorization: localStorage.getItem("token") },
+        data: {
+          note: {
+            labelInputBoxValue,
+            textareaBoxValue,
+            priorityRadioBoxValue,
+            inputTextTitleValue,
+            notesBgColor,
+            noteUpdatedAt,
+          },
+        },
+      }).then((response) =>
+        notesTakingFn({
+          type: "GETNOTESDATAFROMAPI",
+          payload: response.data.notes,
+        })
+      );
+      Toast({ type: "info", message: "notes has been succesfully updated." });
+      navigate("/Home");
+    } catch (error) {
+      console.log(`something went wrong`, error);
+    }
+  }
+
+  useEffect(() => {
+    setId(localStorage.getItem("id"));
+    notesTakingFn({
+      type: "PRIORITYRADIOBOXVALUE",
+      payload: localStorage.getItem("priorityRadioBoxValue"),
+    });
+    notesTakingFn({
+      type: "NOTESBGCOLOR",
+      payload: localStorage.getItem("notesBgColor"),
+    });
+    notesTakingFn({
+      type: "INPUTTEXTTITLEVALUE",
+      payload: localStorage.getItem("inputTextTitleValue"),
+    });
+    notesTakingFn({
+      type: "LABELINPUTBOXVALUE",
+      payload: localStorage.getItem("labelInputBoxValue"),
+    });
+    notesTakingFn({
+      type: "TEXTAREABOXVALUE",
+      payload: localStorage.getItem("textareaBoxValue"),
+    });
+  }, []);
   return (
     <div>
       <div
@@ -39,7 +84,7 @@ function EditForm() {
         }}
       >
         <div className="form-container">
-          <form onSubmit={addNotesintoDb}>
+          <form onSubmit={updateNotesDataFn}>
             <input
               type="text"
               name="name"

@@ -38,3 +38,9 @@ span.label-text {
 .title {
   padding: 1rem;
 }
+.note-timing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

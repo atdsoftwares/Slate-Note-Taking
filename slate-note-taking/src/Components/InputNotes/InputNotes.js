@@ -102,7 +102,6 @@ function InputNotes() {
                 <input
                   type="color"
                   className="input-color"
-                  value={notesBgColor}
                   onChange={(e) =>
                     notesTakingFn({
                       type: "NOTESBGCOLOR",

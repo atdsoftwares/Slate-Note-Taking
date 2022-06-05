@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useReducer, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import Toast from "../Toast/Toast";
 
@@ -29,6 +30,8 @@ function NotetakingContext({ children }) {
         return { ...state, notesModal: action.payload };
       case "NOTECREATEDAT":
         return { ...state, noteCreationTime: action.payload };
+      case "NOTEUPDATEDAT":
+        return { ...state, noteUpdationTime: action.payload };
 
       default:
         return state;
@@ -50,6 +53,7 @@ function NotetakingContext({ children }) {
     notesModal: "none",
     noteCreationTime: "",
     labelInputBoxValue: "",
+    noteUpdationTime: "",
   });
 
   const {
@@ -126,18 +130,21 @@ function NotetakingContext({ children }) {
     });
   }
 
-  const [getParams, setGetParams] = useState();
-  const [newData, setNewData] = useState([]);
-
-  async function editData(getParams) {
-    // const newData1 = getNotesData.find((elem) => {
-    //   return elem._id === getParams;
-    // });
-    // notesTakingFn({
-    //   type: "ADDTONOTES",
-    //   payload: newData1,
-    // });
-    Toast({ type: "info", message: "feature is under devlopment" });
+  function editData(
+    _id,
+    labelInputBoxValue,
+    textareaBoxValue,
+    priorityRadioBoxValue,
+    inputTextTitleValue,
+    notesBgColor
+  ) {
+    localStorage.setItem("id", _id);
+    localStorage.setItem("labelInputBoxValue", labelInputBoxValue);
+    localStorage.setItem("textareaBoxValue", textareaBoxValue);
+    localStorage.setItem("priorityRadioBoxValue", priorityRadioBoxValue);
+    localStorage.setItem("inputTextTitleValue", inputTextTitleValue);
+    localStorage.setItem("notesBgColor", notesBgColor);
+    Toast({ type: "info", message: "you can now edit the note !" });
   }
 
   return (
@@ -158,8 +165,7 @@ function NotetakingContext({ children }) {
           getNotesData,
           getNotesDataFromAPIFn,
           editData,
-          setGetParams,
-          newData,
+          inputTextTitleValue,
         }}
       >
         {children}

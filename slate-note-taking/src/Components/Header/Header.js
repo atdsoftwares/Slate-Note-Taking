@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useLoginSignupContext } from "../Context/LoginSignupContext";
 import "./Header.css";
+
 function Header() {
+  const { logoutHandler } = useLoginSignupContext();
+  const token = localStorage.getItem("token");
   return (
     <div>
       <nav class="navigation-menu">
@@ -20,24 +23,21 @@ function Header() {
           //   }
         />
         <div class="navigation__right">
-          {/* {!token ? (
-            <Link to="/login"> */}
-          <button className="btn btn-danger">Login</button>
-          {/* </Link>
+          {!token ? (
+            <Link to="/login">
+              <button className="btn btn-danger">Login</button>
+            </Link>
           ) : (
-            <Link to="/login"> */}
-          <button
-            className="btn btn-danger"
-            //   onClick={logoutHandler}
-          >
-            Logout
-          </button>
-          {/* </Link>
-          )} */}
+            <Link to="/login">
+              <button className="btn btn-danger" onClick={logoutHandler}>
+                Logout
+              </button>
+            </Link>
+          )}
 
-          {/* <Link to="/accounts"> */}
-          <span class="material-icons navigationmi"> account_circle</span>
-          {/* </Link> */}
+          <Link to="/accounts">
+            <span class="material-icons navigationmi"> account_circle</span>
+          </Link>
         </div>
       </nav>
     </div>

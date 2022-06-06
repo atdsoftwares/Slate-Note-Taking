@@ -30,9 +30,16 @@ function NotetakingContext({ children }) {
         return { ...state, notesModal: action.payload };
       case "NOTECREATEDAT":
         return { ...state, noteCreationTime: action.payload };
-      case "NOTEUPDATEDAT":
-        return { ...state, noteUpdationTime: action.payload };
-
+      case "INPUT_SEARCH_NOTES":
+        return { ...state, search: action.payload };
+      case "label":
+        return {
+          ...state,
+          labelInputBoxValue: {
+            ...state["labelInputBoxValue"],
+            label: !state.labelInputBoxValue.label,
+          },
+        };
       default:
         return state;
     }
@@ -52,8 +59,10 @@ function NotetakingContext({ children }) {
     notesBgColor: "",
     notesModal: "none",
     noteCreationTime: "",
-    labelInputBoxValue: "",
-    noteUpdationTime: "",
+    search: "",
+    labelInputBoxValue: {
+      label: false,
+    },
   });
 
   const {
@@ -61,11 +70,14 @@ function NotetakingContext({ children }) {
     addToNotes,
     inputTextTitleValue,
     priorityRadioBoxValue,
-    labelRadioBoxValue,
     notesBgColor,
     notesModal,
     labelInputBoxValue,
     getNotesData,
+    inputSearchNotes,
+    label,
+    search,
+    labelSort,
   } = state;
 
   // get notes from Db
@@ -147,6 +159,35 @@ function NotetakingContext({ children }) {
     Toast({ type: "info", message: "you can now edit the note !" });
   }
 
+  // search filter
+  function sortyBySearchFn(getNotesData, search) {
+    const sortedproductdata = [...getNotesData];
+    if (search) {
+      return sortedproductdata.filter((s) =>
+        s.inputTextTitleValue.toLowerCase().includes(search)
+      );
+    } else {
+      return sortedproductdata;
+    }
+  }
+
+  // search by label
+  const sortByCategoryFn = (getNotesData, label) => {
+    const sortedproductdata = [...getNotesData];
+    console.log(labelInputBoxValue);
+    if (labelInputBoxValue.label) {
+      return sortedproductdata.filter(
+        (notes) => notes.labelInputBoxValue === labelInputBoxValue
+      );
+    }
+
+    return sortedproductdata;
+  };
+
+  const sortedData = sortByCategoryFn(getNotesData, label);
+  const finalData = sortyBySearchFn(sortedData, search);
+  // const finalData = sortyBySearchFn(getNotesData, search);
+
   return (
     <div>
       <noteTakingContext.Provider
@@ -154,7 +195,7 @@ function NotetakingContext({ children }) {
           notesTakingFn,
           state,
           priorityRadioBoxValue,
-          labelRadioBoxValue,
+
           textareaBoxValue,
           addNotesintoDb,
           addToNotes,
@@ -166,6 +207,9 @@ function NotetakingContext({ children }) {
           getNotesDataFromAPIFn,
           editData,
           inputTextTitleValue,
+          inputSearchNotes,
+          finalData,
+          labelSort,
         }}
       >
         {children}

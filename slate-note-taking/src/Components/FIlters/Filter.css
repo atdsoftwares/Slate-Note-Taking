@@ -1,0 +1,47 @@
+.filter {
+  width: 90%;
+  height: 4rem;
+  background-color: rgb(190, 190, 190);
+  margin: 5rem;
+  margin-left: 8rem;
+  border-radius: 0.3rem;
+}
+.date-time {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0.4rem;
+}
+input[type="datetime-local"] {
+  border-radius: 0.3rem;
+  padding: 0.4rem;
+  outline: none;
+  border: none;
+}
+
+input[type="submit"].chips {
+  color: black;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  border-radius: 100vh;
+  font-weight: bold;
+  width: 20%;
+  height: 2rem;
+  cursor: pointer;
+}
+
+input.chips:hover {
+  background-color: rgb(146, 146, 239);
+  color: white;
+}
+
+.chips-container1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+  max-width: auto;
+  margin-left: 20rem;
+  margin-top: -4.5rem;
+}

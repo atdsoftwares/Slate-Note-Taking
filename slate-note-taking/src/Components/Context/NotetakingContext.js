@@ -32,14 +32,7 @@ function NotetakingContext({ children }) {
         return { ...state, noteCreationTime: action.payload };
       case "INPUT_SEARCH_NOTES":
         return { ...state, search: action.payload };
-      case "label":
-        return {
-          ...state,
-          labelInputBoxValue: {
-            ...state["labelInputBoxValue"],
-            label: !state.labelInputBoxValue.label,
-          },
-        };
+
       default:
         return state;
     }
@@ -60,9 +53,7 @@ function NotetakingContext({ children }) {
     notesModal: "none",
     noteCreationTime: "",
     search: "",
-    labelInputBoxValue: {
-      label: false,
-    },
+    labelInputBoxValue: "",
   });
 
   const {
@@ -75,9 +66,7 @@ function NotetakingContext({ children }) {
     labelInputBoxValue,
     getNotesData,
     inputSearchNotes,
-    label,
     search,
-    labelSort,
   } = state;
 
   // get notes from Db
@@ -172,10 +161,10 @@ function NotetakingContext({ children }) {
   }
 
   // search by label
-  const sortByCategoryFn = (getNotesData, label) => {
+  const sortByCategoryFn = (getNotesData, labelInputBoxValue) => {
     const sortedproductdata = [...getNotesData];
-    console.log(labelInputBoxValue);
-    if (labelInputBoxValue.label) {
+
+    if (labelInputBoxValue) {
       return sortedproductdata.filter(
         (notes) => notes.labelInputBoxValue === labelInputBoxValue
       );
@@ -184,7 +173,7 @@ function NotetakingContext({ children }) {
     return sortedproductdata;
   };
 
-  const sortedData = sortByCategoryFn(getNotesData, label);
+  const sortedData = sortByCategoryFn(getNotesData, labelInputBoxValue);
   const finalData = sortyBySearchFn(sortedData, search);
   // const finalData = sortyBySearchFn(getNotesData, search);
 
@@ -195,7 +184,6 @@ function NotetakingContext({ children }) {
           notesTakingFn,
           state,
           priorityRadioBoxValue,
-
           textareaBoxValue,
           addNotesintoDb,
           addToNotes,
@@ -209,7 +197,6 @@ function NotetakingContext({ children }) {
           inputTextTitleValue,
           inputSearchNotes,
           finalData,
-          labelSort,
         }}
       >
         {children}

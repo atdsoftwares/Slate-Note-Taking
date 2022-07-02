@@ -1,36 +1,41 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { useNoteTakingContext } from "../Context/NotetakingContext";
 import "./Filter.css";
 function Filter() {
-  const { getNotesData, getNotesDataFromAPIFn, notesTakingFn, label } =
+  const { getNotesData, getNotesDataFromAPIFn, notesTakingFn, finalData } =
     useNoteTakingContext();
 
   useEffect(() => {
     getNotesDataFromAPIFn();
   }, []);
+  const [data, setData] = useState(getNotesData);
+  console.log("🚀 ~ file: Filter.js ~ line 12 ~ Filter ~ data", data);
 
   return (
     <div className="filter">
-      <div className="date-time">
-        Sort by :
-        <input type="datetime-local" />
-      </div>
       <div className="chips-container1">
-        Label:
-        {getNotesData.map((notes) => {
-          return (
-            <input
-              type="submit"
-              className="chips"
-              value={notes.labelInputBoxValue}
-              onClick={() =>
-                notesTakingFn({
-                  type: "label",
-                })
-              }
-            />
-          );
-        })}
+        Sort By Label:
+        <button value="All" className="chips" onClick={() => setData(data)}>
+          ALl
+        </button>
+        {getNotesData &&
+          getNotesData.map((notes) => {
+            return (
+              <button
+                key={notes._id}
+                className="chips"
+                value={notes.labelInputBoxValue}
+                onClick={() =>
+                  notesTakingFn({
+                    type: "LABELINPUTBOXVALUE",
+                    payload: notes.labelInputBoxValue,
+                  })
+                }
+              >
+                {notes.labelInputBoxValue}
+              </button>
+            );
+          })}
       </div>
     </div>
   );

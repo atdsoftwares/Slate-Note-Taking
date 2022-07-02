@@ -2,8 +2,9 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 5rem;
+  margin-top: 1rem;
   margin-left: 8rem;
+  margin-bottom: 4rem;
   margin-right: 2rem;
   overflow: auto;
 }

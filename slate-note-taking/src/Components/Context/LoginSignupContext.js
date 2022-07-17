@@ -34,10 +34,7 @@ function LoginSignupContext({ children }) {
   }
 
   const { name, email, password, number, loginData } = state;
-  console.log(
-    "🚀 ~ file: LoginSignupContext.js ~ line 37 ~ LoginSignupContext ~ loginData",
-    loginData
-  );
+
   const loginHandler = async (e) => {
     e.preventDefault();
     try {

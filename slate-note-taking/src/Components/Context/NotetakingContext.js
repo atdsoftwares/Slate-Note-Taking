@@ -30,8 +30,8 @@ function NotetakingContext({ children }) {
         return { ...state, notesModal: action.payload };
       case "NOTECREATEDAT":
         return { ...state, noteCreationTime: action.payload };
-      case "NOTEUPDATEDAT":
-        return { ...state, noteUpdationTime: action.payload };
+      case "INPUT_SEARCH_NOTES":
+        return { ...state, search: action.payload };
 
       default:
         return state;
@@ -52,8 +52,8 @@ function NotetakingContext({ children }) {
     notesBgColor: "",
     notesModal: "none",
     noteCreationTime: "",
+    search: "",
     labelInputBoxValue: "",
-    noteUpdationTime: "",
   });
 
   const {
@@ -61,11 +61,12 @@ function NotetakingContext({ children }) {
     addToNotes,
     inputTextTitleValue,
     priorityRadioBoxValue,
-    labelRadioBoxValue,
     notesBgColor,
     notesModal,
     labelInputBoxValue,
     getNotesData,
+    inputSearchNotes,
+    search,
   } = state;
 
   // get notes from Db
@@ -147,6 +148,35 @@ function NotetakingContext({ children }) {
     Toast({ type: "info", message: "you can now edit the note !" });
   }
 
+  // search filter
+  function sortyBySearchFn(getNotesData, search) {
+    const sortedproductdata = [...getNotesData];
+    if (search) {
+      return sortedproductdata.filter((s) =>
+        s.inputTextTitleValue.toLowerCase().includes(search)
+      );
+    } else {
+      return sortedproductdata;
+    }
+  }
+
+  // search by label
+  const sortByCategoryFn = (getNotesData, labelInputBoxValue) => {
+    const sortedproductdata = [...getNotesData];
+
+    if (labelInputBoxValue) {
+      return sortedproductdata.filter(
+        (notes) => notes.labelInputBoxValue === labelInputBoxValue
+      );
+    }
+
+    return sortedproductdata;
+  };
+
+  const sortedData = sortByCategoryFn(getNotesData, labelInputBoxValue);
+  const finalData = sortyBySearchFn(sortedData, search);
+  // const finalData = sortyBySearchFn(getNotesData, search);
+
   return (
     <div>
       <noteTakingContext.Provider
@@ -154,7 +184,6 @@ function NotetakingContext({ children }) {
           notesTakingFn,
           state,
           priorityRadioBoxValue,
-          labelRadioBoxValue,
           textareaBoxValue,
           addNotesintoDb,
           addToNotes,
@@ -166,6 +195,8 @@ function NotetakingContext({ children }) {
           getNotesDataFromAPIFn,
           editData,
           inputTextTitleValue,
+          inputSearchNotes,
+          finalData,
         }}
       >
         {children}

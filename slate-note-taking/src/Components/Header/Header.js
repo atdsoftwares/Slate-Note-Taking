@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLoginSignupContext } from "../Context/LoginSignupContext";
+import { useNoteTakingContext } from "../Context/NotetakingContext";
 import "./Header.css";
 
 function Header() {
   const { logoutHandler } = useLoginSignupContext();
+  const { inputSearchNotes, notesTakingFn } = useNoteTakingContext();
+
   const token = localStorage.getItem("token");
   return (
     <div>
@@ -17,10 +20,14 @@ function Header() {
         <input
           type="search"
           class="navigation__input"
-          placeholder="search item"
-          //   onChange={(e) =>
-          //     dispatch({ type: "SEARCHBAR", payload: e.target.value })
-          //   }
+          placeholder="search by title"
+          value={inputSearchNotes}
+          onChange={(e) =>
+            notesTakingFn({
+              type: "INPUT_SEARCH_NOTES",
+              payload: e.target.value,
+            })
+          }
         />
         <div class="navigation__right">
           {!token ? (

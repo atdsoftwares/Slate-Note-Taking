@@ -1,0 +1,42 @@
+.filter {
+  width: 90%;
+  height: 5rem;
+  background-color: rgb(190, 190, 190);
+  margin-top: 10rem;
+  margin-left: 8rem;
+  border-radius: 0.3rem;
+}
+
+button.chips {
+  color: black;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-weight: bold;
+  width: auto;
+  padding: 0.5rem;
+  margin: 1rem;
+  height: 3rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  text-align: center;
+}
+
+button.chips:active {
+  background-color: red;
+  color: white;
+}
+
+button:hover {
+  background-color: rgb(92, 92, 203);
+  color: white;
+}
+.chips-container1 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 99%;
+  max-width: auto;
+  margin-left: 1rem;
+  margin-top: -4.5rem;
+}

@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
-import { useArchiveContext } from "../Components/Context/ArchiveNotesContext";
-import { useNoteTakingContext } from "../Components/Context/NotetakingContext";
-import Footer from "../Components/Footer/Footer";
-import Header from "../Components/Header/Header";
-import ArchiveNotesCard from "../Components/NotesCard/ArchiveNotesCard";
-import Sidebar from "../Components/Sidebar/Sidebar";
+import { React, useEffect } from "../Utils/CustomUtils";
+import { useArchiveContext } from "../Context/IndexAllContext";
+import {
+  ArchiveNotesCard,
+  Footer,
+  Header,
+  Sidebar,
+} from "../Components/IndexAllComponents";
+import { getArchiveNotesFn } from "../Services/ArchiveNotesServices";
 
 function Archivespage() {
-  const { getArchiveNotesFn, getArchivedNotes } = useArchiveContext();
+  const { getArchivedNotes, notesArchiveFn } = useArchiveContext();
 
   useEffect(() => {
-    getArchiveNotesFn();
+    getArchiveNotesFn(notesArchiveFn);
   }, []);
 
   return (

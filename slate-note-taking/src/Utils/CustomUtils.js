@@ -1,5 +1,12 @@
 import React, { createContext, useContext, useReducer, useState } from "react";
-import { NavLink as Link, useNavigate, useParams } from "react-router-dom";
+import {
+  NavLink,
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -23,4 +30,7 @@ export {
   uuid,
   useParams,
   useReducer,
+  Route,
+  Routes,
+  NavLink,
 };

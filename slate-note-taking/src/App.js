@@ -1,16 +1,16 @@
-import { Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { Route, Routes } from "./Utils/CustomUtils";
 import "./App.css";
-import Auth from "./Components/Auth/Auth";
-import Accountpage from "./Pages/Accountpage";
-import Archivespage from "./Pages/Archivespage";
-import Editnotespage from "./Pages/Editnotespage";
-import Homepage from "./Pages/Homepage";
-import Loginpage from "./Pages/Loginpage";
-import Signuppage from "./Pages/Signuppage";
-import Trashpage from "./Pages/Trashpage";
-
-import Welcomepage from "./Pages/Welcomepage";
+import { Auth } from "./Components/IndexAllComponents";
+import {
+  Accountpage,
+  Archivespage,
+  Editnotespage,
+  Homepage,
+  Loginpage,
+  Signuppage,
+  Trashpage,
+  Welcomepage,
+} from "./Pages/IndexAllPages";
 
 function App() {
   return (
@@ -65,7 +65,6 @@ function App() {
           }
         />
       </Routes>
-      <ToastContainer position="top-center" />
     </div>
   );
 }

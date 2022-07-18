@@ -1,13 +1,16 @@
-import React from "react";
+import { Toaster } from "react-hot-toast";
 import App from "./App";
-import ArchiveNotesContext from "./Components/Context/ArchiveNotesContext";
-import LoginSignupContext from "./Components/Context/LoginSignupContext";
-import NotetakingContext from "./Components/Context/NotetakingContext";
-import TrashNotesContext from "./Components/Context/TrashNotesContext";
+import {
+  ArchiveNotesContext,
+  NotetakingContext,
+  TrashNotesContext,
+  LoginSignupContext,
+} from "./Context/CoreContextFiles";
 
 function Pages() {
   return (
     <div>
+      <Toaster position="top-center" reverseOrder={false} />
       <NotetakingContext>
         <ArchiveNotesContext>
           <TrashNotesContext>

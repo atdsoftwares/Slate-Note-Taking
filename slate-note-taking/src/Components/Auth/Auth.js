@@ -1,5 +1,4 @@
-import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { React, Navigate, useLocation } from "../../Utils/CustomUtils";
 
 function Auth({ children }) {
   const location = useLocation();

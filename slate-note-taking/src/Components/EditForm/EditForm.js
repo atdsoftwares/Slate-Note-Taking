@@ -1,11 +1,13 @@
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useNoteTakingContext } from "../Context/NotetakingContext";
-import { useEffect, useState } from "react";
-import RTEEditor from "../Editor/RTEEditor";
+import {
+  axios,
+  toast,
+  useEffect,
+  useNavigate,
+  useState,
+} from "../../Utils/CustomUtils";
+import { useNoteTakingContext } from "../../Context/IndexAllContext";
+import RTEEditor from "../../Components/Editor/RTEEditor";
 import "./EditForm.css";
-import axios from "axios";
-import Toast from "../Toast/Toast";
 function EditForm() {
   const {
     notesTakingFn,
@@ -14,6 +16,7 @@ function EditForm() {
     textareaBoxValue,
     labelInputBoxValue,
     inputTextTitleValue,
+    isOpen,
   } = useNoteTakingContext();
 
   const noteCreatedAt = new Date();
@@ -46,11 +49,18 @@ function EditForm() {
           payload: response.data.notes,
         })
       );
-      Toast({ type: "info", message: "notes has been succesfully updated." });
+      toast.success(`Note Updated Successfully`);
       navigate("/Home");
     } catch (error) {
       console.log(`something went wrong`, error);
     }
+
+    notesTakingFn({ type: "INPUTTEXTTITLEVALUE", payload: null });
+    notesTakingFn({ type: "PRIORITYRADIOBOXVALUE", payload: null });
+    notesTakingFn({ type: "LABELINPUTBOXVALUE", payload: null });
+    notesTakingFn({ type: "TEXTAREABOXVALUE", payload: "" });
+    notesTakingFn({ type: "NOTESBGCOLOR", payload: null });
+    notesTakingFn({ type: "NOTE_TAKING_MODAL", payload: !isOpen });
   }
 
   useEffect(() => {

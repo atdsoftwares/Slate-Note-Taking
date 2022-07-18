@@ -1,16 +1,37 @@
-import React, { useState } from "react";
-import { useNoteTakingContext } from "../Context/NotetakingContext";
+import { useNoteTakingContext } from "../../Context/IndexAllContext";
+import { addNotesintoDbFn } from "../../Services/NoteTakingServices";
 import RTEEditor from "../Editor/RTEEditor";
 import "./InputNotes.css";
 function InputNotes() {
   const {
-    notesTakingFn,
-    priorityRadioBoxValue,
-    labelRadioBoxValue,
-    addNotesintoDb,
     notesBgColor,
-    notesModal,
+    inputTextTitleValue,
+    priorityRadioBoxValue,
+    labelInputBoxValue,
+    textareaBoxValue,
+    noteCreationTime,
+    notesTakingFn,
+    isOpen,
   } = useNoteTakingContext();
+  function submitNotes(e) {
+    addNotesintoDbFn(
+      e,
+      inputTextTitleValue,
+      priorityRadioBoxValue,
+      labelInputBoxValue,
+      textareaBoxValue,
+      notesBgColor,
+      noteCreationTime,
+      notesTakingFn
+    );
+
+    notesTakingFn({ type: "INPUTTEXTTITLEVALUE", payload: null });
+    notesTakingFn({ type: "PRIORITYRADIOBOXVALUE", payload: null });
+    notesTakingFn({ type: "LABELINPUTBOXVALUE", payload: null });
+    notesTakingFn({ type: "TEXTAREABOXVALUE", payload: null });
+    notesTakingFn({ type: "NOTESBGCOLOR", payload: null });
+    notesTakingFn({ type: "NOTE_TAKING_MODAL", payload: !isOpen });
+  }
 
   return (
     <div>
@@ -22,7 +43,7 @@ function InputNotes() {
         defaultValue="#FFFF"
       >
         <div className="form-container">
-          <form onSubmit={addNotesintoDb}>
+          <form onSubmit={submitNotes}>
             <input
               type="text"
               name="name"
@@ -111,7 +132,7 @@ function InputNotes() {
                     })
                   }
                 />
-                <span className="material-icons rte-icons1">color_lens </span>
+                <span className="material-icons rte-icons2">color_lens </span>
               </label>
             </div>
           </form>

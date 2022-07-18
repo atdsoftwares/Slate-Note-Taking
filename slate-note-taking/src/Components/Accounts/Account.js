@@ -1,15 +1,11 @@
-import React from "react";
-import { useLoginSignupContext } from "../Context/LoginSignupContext";
-import { useNoteTakingContext } from "../Context/NotetakingContext";
 import "./Account.css";
+import {
+  useLoginSignupContext,
+  useNoteTakingContext,
+} from "../../Context/IndexAllContext";
 function Account() {
-  const { state } = useLoginSignupContext();
+  const { loginData } = useLoginSignupContext();
   const { getNotesData } = useNoteTakingContext();
-  console.log(
-    "🚀 ~ file: Account.js ~ line 8 ~ Account ~ finalData",
-    getNotesData
-  );
-  const { loginData } = state;
   const { _id, email, name, number } = loginData;
   return (
     <div>

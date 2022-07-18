@@ -1,7 +1,11 @@
-import React from "react";
-import { useTrashNotesContext } from "../Context/TrashNotesContext";
+import { useTrashNotesContext } from "../../Context/IndexAllContext";
+import {
+  deleteTrashedNotesFn,
+  restoreTrashedNotesFn,
+} from "../../Services/TrashNotesServices";
 import "./Notescard.css";
 function TrashNotesCard({ trashnotesdata }) {
+  const { notesTrashFn } = useTrashNotesContext();
   const {
     inputTextTitleValue,
     priorityRadioBoxValue,
@@ -11,9 +15,6 @@ function TrashNotesCard({ trashnotesdata }) {
     labelInputBoxValue,
     _id,
   } = trashnotesdata;
-
-  const { deleteTrashedNotesFn, restoreTrashedNotesFn } =
-    useTrashNotesContext();
 
   return (
     <div style={{ margin: "0.5rem" }}>
@@ -40,13 +41,13 @@ function TrashNotesCard({ trashnotesdata }) {
         <div className="action-icons">
           <span
             className="material-icons notesmi"
-            onClick={() => deleteTrashedNotesFn(_id)}
+            onClick={() => deleteTrashedNotesFn(_id, notesTrashFn)}
           >
             delete
           </span>
           <span
             className="material-icons notesmi"
-            onClick={() => restoreTrashedNotesFn(_id)}
+            onClick={() => restoreTrashedNotesFn(_id, notesTrashFn)}
           >
             restore_from_trash
           </span>

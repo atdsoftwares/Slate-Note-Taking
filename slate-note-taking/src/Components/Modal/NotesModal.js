@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
+import { useNoteTakingContext } from "../../Context/NotetakingContext";
+import { React, useState, Modal } from "../../Utils/CustomUtils";
 import InputNotes from "../InputNotes/InputNotes";
 import "./NotesModal.css";
+
 function NotesModal() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, notesTakingFn } = useNoteTakingContext();
   function toggleModal() {
-    setIsOpen(!isOpen);
+    notesTakingFn({ type: "NOTE_TAKING_MODAL", payload: !isOpen });
   }
   return (
     <div>
@@ -13,7 +14,7 @@ function NotesModal() {
         <span class="material-icons singlevideomi">note_add</span>
       </div>
       <Modal
-        isOpen={isOpen}
+        isOpen={!isOpen}
         onRequestClose={toggleModal}
         contentLabel="My dialog"
         className="modal"

@@ -1,12 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useLoginSignupContext } from "../Context/LoginSignupContext";
-import { useNoteTakingContext } from "../Context/NotetakingContext";
+import { Link, useNavigate } from "../../Utils/CustomUtils";
+import { useNoteTakingContext } from "../../Context/IndexAllContext";
 import "./Header.css";
+import { logoutHandler } from "../../Services/AuthServices";
 
 function Header() {
-  const { logoutHandler } = useLoginSignupContext();
   const { inputSearchNotes, notesTakingFn } = useNoteTakingContext();
+  const navigate = useNavigate();
+  function logOutUserFromApp() {
+    logoutHandler();
+    navigate("/");
+  }
 
   const token = localStorage.getItem("token");
   return (
@@ -36,7 +39,7 @@ function Header() {
             </Link>
           ) : (
             <Link to="/login">
-              <button className="btn btn-danger" onClick={logoutHandler}>
+              <button className="btn btn-danger" onClick={logOutUserFromApp}>
                 Logout
               </button>
             </Link>

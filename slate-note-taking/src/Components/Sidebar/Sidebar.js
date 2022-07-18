@@ -1,12 +1,8 @@
-import React from "react";
-import { NavLink as Link } from "react-router-dom";
-import { useNoteTakingContext } from "../Context/NotetakingContext";
+import { React, NavLink as Link } from "../../Utils/CustomUtils";
 import NotesModal from "../Modal/NotesModal";
-
 import "./Sidebar.css";
-function Sidebar() {
-  const { notesTakingFn, notesModal, toggleNotes } = useNoteTakingContext();
 
+function Sidebar() {
   return (
     <div>
       <aside className="aside">

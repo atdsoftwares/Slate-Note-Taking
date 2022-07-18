@@ -1,8 +1,7 @@
-import React, { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import "./RTEEditor.css";
-import { useNoteTakingContext } from "../Context/NotetakingContext";
+import { useNoteTakingContext } from "../../Context/IndexAllContext";
 function RTEEditor() {
   const { textareaBoxValue, notesTakingFn } = useNoteTakingContext();
 

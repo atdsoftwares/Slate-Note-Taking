@@ -1,8 +1,11 @@
-import React from "react";
-import { useArchiveContext } from "../Context/ArchiveNotesContext";
+import { useArchiveContext } from "../../Context/IndexAllContext";
+import {
+  deleteArchiveNotesFn,
+  restoreArchiveNotesFn,
+} from "../../Services/ArchiveNotesServices";
 import "./Notescard.css";
 function ArchiveNotesCard({ archivenotesdata }) {
-  const { deleteArchiveNotesFn, restoreArchiveNotesFn } = useArchiveContext();
+  const { notesArchiveFn } = useArchiveContext();
   const {
     inputTextTitleValue,
     priorityRadioBoxValue,
@@ -38,13 +41,13 @@ function ArchiveNotesCard({ archivenotesdata }) {
         <div className="action-icons">
           <span
             className="material-icons notesmi"
-            onClick={() => restoreArchiveNotesFn(_id)}
+            onClick={() => restoreArchiveNotesFn(_id, notesArchiveFn)}
           >
             unarchive
           </span>
           <span
             className="material-icons notesmi"
-            onClick={() => deleteArchiveNotesFn(_id)}
+            onClick={() => deleteArchiveNotesFn(_id, notesArchiveFn)}
           >
             delete
           </span>

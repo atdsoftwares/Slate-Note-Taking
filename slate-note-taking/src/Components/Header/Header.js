@@ -44,10 +44,6 @@ function Header() {
               </button>
             </Link>
           )}
-
-          <Link to="/accounts">
-            <span class="material-icons navigationmi"> account_circle</span>
-          </Link>
         </div>
       </nav>
     </div>

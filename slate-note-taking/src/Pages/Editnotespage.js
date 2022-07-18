@@ -12,7 +12,7 @@ function Editnotespage() {
       <Header />
       <Sidebar />
       <EditForm />
-      <InputNotes />
+      {/* <InputNotes /> */}
       <Footer />
     </div>
   );

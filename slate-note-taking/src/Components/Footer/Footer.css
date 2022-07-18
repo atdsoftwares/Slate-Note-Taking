@@ -1,17 +1,10 @@
-@import "https://deploy-preview-13--agri-component.netlify.app/css/components.css";
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
 .footer-items {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
   height: 4rem;
-  background-color: rgb(108, 170, 251);
+  background-color: rgb(255, 255, 255);
   max-width: 100%;
   padding: 1rem;
   bottom: 0;

@@ -79,12 +79,12 @@ function EditForm() {
   return (
     <div>
       <div
-        className="notes1-container"
+        className="notes2-container"
         style={{
           backgroundColor: notesBgColor,
         }}
       >
-        <div className="form-container">
+        <div className="form-container1">
           <form onSubmit={updateNotesDataFn}>
             <input
               type="text"
@@ -100,7 +100,7 @@ function EditForm() {
                 })
               }
             />
-            <label className="label-radio-box">
+            <label className="label-radio-box1">
               Priority
               <input
                 type="radio"
@@ -162,11 +162,11 @@ function EditForm() {
                 })
               }
             />
-            <div className="rte-icons">
+            <div className="rte-icons1">
               <RTEEditor textareaBoxValue={textareaBoxValue} />
             </div>
 
-            <div className="color-pallete">
+            <div className="color-pallete1">
               <input type="submit" className="take-notes-btn" />
               <label>
                 <input
@@ -180,7 +180,7 @@ function EditForm() {
                     })
                   }
                 />
-                <span className="material-icons rte-icons1">color_lens </span>
+                <span className="material-icons rte-icons2">color_lens </span>
               </label>
             </div>
           </form>

@@ -25,7 +25,7 @@ function Archivespage() {
             No notes to display in archive page, add some !
           </h1>
         ) : (
-          <div className="notes-container">
+          <div className="notes-container" style={{ marginTop: "5rem" }}>
             {getArchivedNotes.map((archivenotesdata) => (
               <ArchiveNotesCard
                 archivenotesdata={archivenotesdata}

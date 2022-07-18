@@ -6,6 +6,7 @@ import Footer from "../Components/Footer/Footer";
 import Header from "../Components/Header/Header";
 
 import InputNotes from "../Components/InputNotes/InputNotes";
+import NotesModal from "../Components/Modal/NotesModal";
 
 import Notescard from "../Components/NotesCard/Notescard";
 import Sidebar from "../Components/Sidebar/Sidebar";
@@ -22,14 +23,12 @@ function Homepage() {
       <Header />
       <Sidebar />
       <Filter />
-      <InputNotes />
+
       <div>
         {finalData.length <= 0 ? (
           <h1 className="header-text">
             No notes to display in Homepage , add some from
-            <span onClick={toggleNotes} className="fnpointer">
-              here
-            </span>
+            <NotesModal />
           </h1>
         ) : (
           <div className="notes-container">

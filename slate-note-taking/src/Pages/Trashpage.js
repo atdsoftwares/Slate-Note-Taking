@@ -25,7 +25,7 @@ function Trashpage() {
             No notes to display in trash page, add some ..!
           </h1>
         ) : (
-          <div className="notes-container">
+          <div className="notes-container" style={{ marginTop: "5rem" }}>
             {getTrashedNotes.map((trashnotesdata) => (
               <TrashNotesCard
                 trashnotesdata={trashnotesdata}

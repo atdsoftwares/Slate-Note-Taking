@@ -16,7 +16,9 @@ function InputNotes() {
     <div>
       <div
         className="notes1-container"
-        style={{ backgroundColor: notesBgColor, display: notesModal }}
+        style={{
+          backgroundColor: notesBgColor,
+        }}
         defaultValue="#FFFF"
       >
         <div className="form-container">

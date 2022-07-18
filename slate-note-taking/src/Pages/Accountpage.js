@@ -1,12 +1,15 @@
-import React from "react";
-import Account from "../Components/Accounts/Account";
-import Footer from "../Components/Footer/Footer";
-import Header from "../Components/Header/Header";
+import {
+  Account,
+  Footer,
+  Header,
+  Sidebar,
+} from "../Components/IndexAllComponents";
 
 function Accountpage() {
   return (
     <div>
       <Header />
+      <Sidebar />
       <Account />
       <Footer />
     </div>

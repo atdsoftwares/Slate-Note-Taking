@@ -1,10 +1,11 @@
-import React from "react";
-import { useLoginSignupContext } from "../Context/LoginSignupContext";
 import "./Account.css";
+import {
+  useLoginSignupContext,
+  useNoteTakingContext,
+} from "../../Context/IndexAllContext";
 function Account() {
-  const { state } = useLoginSignupContext();
-  console.log(state);
-  const { loginData } = state;
+  const { loginData } = useLoginSignupContext();
+  const { getNotesData } = useNoteTakingContext();
   const { _id, email, name, number } = loginData;
   return (
     <div>
@@ -15,16 +16,14 @@ function Account() {
           <th>Name</th>
           <th>Email</th>
           <th>Number</th>
-          <th>Watchlater</th>
-          <th>Playlists</th>
+          <th>Notes</th>
         </tr>
         <tr>
           <td>{_id}</td>
           <td>{name}</td>
           <td> {email}</td>
           <td>{number}</td>
-          <td>0</td>
-          <td>0</td>
+          <td>{getNotesData && getNotesData.length}</td>
         </tr>
       </table>
     </div>

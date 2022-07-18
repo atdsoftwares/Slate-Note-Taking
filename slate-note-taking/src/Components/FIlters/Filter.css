@@ -1,9 +1,9 @@
 .filter {
-  width: 90%;
-  height: 5rem;
+  width: 88%;
+  height: auto;
   background-color: rgb(190, 190, 190);
   margin-top: 10rem;
-  margin-left: 8rem;
+  margin-left: 11%;
   border-radius: 0.3rem;
 }
 

@@ -1,11 +1,13 @@
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useNoteTakingContext } from "../Context/NotetakingContext";
-import { useEffect, useState } from "react";
-import RTEEditor from "../Editor/RTEEditor";
+import {
+  axios,
+  toast,
+  useEffect,
+  useNavigate,
+  useState,
+} from "../../Utils/CustomUtils";
+import { useNoteTakingContext } from "../../Context/IndexAllContext";
+import RTEEditor from "../../Components/Editor/RTEEditor";
 import "./EditForm.css";
-import axios from "axios";
-import Toast from "../Toast/Toast";
 function EditForm() {
   const {
     notesTakingFn,
@@ -14,6 +16,7 @@ function EditForm() {
     textareaBoxValue,
     labelInputBoxValue,
     inputTextTitleValue,
+    isOpen,
   } = useNoteTakingContext();
 
   const noteCreatedAt = new Date();
@@ -46,11 +49,18 @@ function EditForm() {
           payload: response.data.notes,
         })
       );
-      Toast({ type: "info", message: "notes has been succesfully updated." });
+      toast.success(`Note Updated Successfully`);
       navigate("/Home");
     } catch (error) {
       console.log(`something went wrong`, error);
     }
+
+    notesTakingFn({ type: "INPUTTEXTTITLEVALUE", payload: null });
+    notesTakingFn({ type: "PRIORITYRADIOBOXVALUE", payload: null });
+    notesTakingFn({ type: "LABELINPUTBOXVALUE", payload: null });
+    notesTakingFn({ type: "TEXTAREABOXVALUE", payload: "" });
+    notesTakingFn({ type: "NOTESBGCOLOR", payload: null });
+    notesTakingFn({ type: "NOTE_TAKING_MODAL", payload: !isOpen });
   }
 
   useEffect(() => {
@@ -79,12 +89,12 @@ function EditForm() {
   return (
     <div>
       <div
-        className="notes1-container"
+        className="notes2-container"
         style={{
           backgroundColor: notesBgColor,
         }}
       >
-        <div className="form-container">
+        <div className="form-container1">
           <form onSubmit={updateNotesDataFn}>
             <input
               type="text"
@@ -100,7 +110,7 @@ function EditForm() {
                 })
               }
             />
-            <label className="label-radio-box">
+            <label className="label-radio-box1">
               Priority
               <input
                 type="radio"
@@ -162,11 +172,11 @@ function EditForm() {
                 })
               }
             />
-            <div className="rte-icons">
+            <div className="rte-icons1">
               <RTEEditor textareaBoxValue={textareaBoxValue} />
             </div>
 
-            <div className="color-pallete">
+            <div className="color-pallete1">
               <input type="submit" className="take-notes-btn" />
               <label>
                 <input
@@ -180,7 +190,7 @@ function EditForm() {
                     })
                   }
                 />
-                <span className="material-icons rte-icons1">color_lens </span>
+                <span className="material-icons rte-icons2">color_lens </span>
               </label>
             </div>
           </form>

@@ -1,15 +1,13 @@
-import { React, useEffect, useState } from "react";
-import { useNoteTakingContext } from "../Context/NotetakingContext";
+import { React, useEffect, useState } from "../../Utils/CustomUtils";
+import { useNoteTakingContext } from "../../Context/IndexAllContext";
 import "./Filter.css";
+import { getNotesDataFromAPIFn } from "../../Services/NoteTakingServices";
 function Filter() {
-  const { getNotesData, getNotesDataFromAPIFn, notesTakingFn, finalData } =
-    useNoteTakingContext();
-
+  const { getNotesData, notesTakingFn } = useNoteTakingContext();
   useEffect(() => {
-    getNotesDataFromAPIFn();
+    getNotesDataFromAPIFn(notesTakingFn);
   }, []);
   const [data, setData] = useState(getNotesData);
-  console.log("🚀 ~ file: Filter.js ~ line 12 ~ Filter ~ data", data);
 
   return (
     <div className="filter">

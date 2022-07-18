@@ -1,8 +1,4 @@
-import axios from "axios";
-import React, { createContext, useContext, useReducer, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { v4 as uuid } from "uuid";
-import Toast from "../Toast/Toast";
+import { createContext, useContext, useReducer } from "../Utils/CustomUtils";
 
 const noteTakingContext = createContext();
 export const useNoteTakingContext = () => useContext(noteTakingContext);
@@ -26,12 +22,12 @@ function NotetakingContext({ children }) {
         return { ...state, addToNotes: action.payload };
       case "NOTESBGCOLOR":
         return { ...state, notesBgColor: action.payload };
-      case "NOTETAKINGMODAL":
-        return { ...state, notesModal: action.payload };
       case "NOTECREATEDAT":
         return { ...state, noteCreationTime: action.payload };
       case "INPUT_SEARCH_NOTES":
         return { ...state, search: action.payload };
+      case "NOTE_TAKING_MODAL":
+        return { ...state, isOpen: action.payload };
 
       default:
         return state;
@@ -46,13 +42,13 @@ function NotetakingContext({ children }) {
     getNotesData: [],
     postNotesData: [],
     addToNotes: [],
-    inputTextTitleValue: "",
-    priorityRadioBoxValue: "",
-    textareaBoxValue: "",
-    notesBgColor: "",
-    notesModal: "none",
+    inputTextTitleValue: null,
+    priorityRadioBoxValue: null,
+    textareaBoxValue: null,
+    notesBgColor: null,
     noteCreationTime: "",
     search: "",
+    isOpen: false,
     labelInputBoxValue: "",
   });
 
@@ -62,91 +58,12 @@ function NotetakingContext({ children }) {
     inputTextTitleValue,
     priorityRadioBoxValue,
     notesBgColor,
-    notesModal,
+    isOpen,
     labelInputBoxValue,
     getNotesData,
     inputSearchNotes,
     search,
   } = state;
-
-  // get notes from Db
-  async function getNotesDataFromAPIFn() {
-    try {
-      await axios({
-        method: "GET",
-        url: `/api/notes/`,
-        headers: { authorization: localStorage.getItem("token") },
-      }).then((response) =>
-        notesTakingFn({
-          type: "GETNOTESDATAFROMAPI",
-          payload: response.data.notes,
-        })
-      );
-    } catch (error) {
-      console.log(`something went wrong`, error);
-    }
-  }
-
-  async function addNotesintoDb(e) {
-    e.preventDefault();
-    const note = {
-      _id: uuid(),
-      inputTextTitleValue,
-      priorityRadioBoxValue,
-      labelInputBoxValue,
-      textareaBoxValue,
-      notesBgColor,
-      noteCreationTime,
-    };
-
-    try {
-      await axios({
-        method: "POST",
-        url: `/api/notes/`,
-        headers: { authorization: localStorage.getItem("token") },
-        data: { note },
-      }).then((response) =>
-        notesTakingFn({
-          type: "GETNOTESDATAFROMAPI",
-          payload: response.data.notes,
-        })
-      );
-      Toast({ type: "info", message: "new note is added " });
-    } catch (error) {
-      console.log(`something went wrong`, error);
-    }
-
-    notesTakingFn({ type: "INPUTTEXTTITLEVALUE", payload: "" });
-    notesTakingFn({ type: "PRIORITYRADIOBOXVALUE", payload: "" });
-    notesTakingFn({ type: "LABELINPUTBOXVALUE", payload: "" });
-    notesTakingFn({ type: "TEXTAREABOXVALUE", payload: "" });
-    notesTakingFn({ type: "NOTESBGCOLOR", payload: "" });
-    notesTakingFn({ type: "NOTETAKINGMODAL", payload: "none" });
-  }
-
-  function toggleNotes() {
-    notesTakingFn({
-      type: "NOTETAKINGMODAL",
-      payload: notesModal === "none" ? "block" : "none",
-    });
-  }
-
-  function editData(
-    _id,
-    labelInputBoxValue,
-    textareaBoxValue,
-    priorityRadioBoxValue,
-    inputTextTitleValue,
-    notesBgColor
-  ) {
-    localStorage.setItem("id", _id);
-    localStorage.setItem("labelInputBoxValue", labelInputBoxValue);
-    localStorage.setItem("textareaBoxValue", textareaBoxValue);
-    localStorage.setItem("priorityRadioBoxValue", priorityRadioBoxValue);
-    localStorage.setItem("inputTextTitleValue", inputTextTitleValue);
-    localStorage.setItem("notesBgColor", notesBgColor);
-    Toast({ type: "info", message: "you can now edit the note !" });
-  }
 
   // search filter
   function sortyBySearchFn(getNotesData, search) {
@@ -185,18 +102,15 @@ function NotetakingContext({ children }) {
           state,
           priorityRadioBoxValue,
           textareaBoxValue,
-          addNotesintoDb,
           addToNotes,
           notesBgColor,
-          notesModal,
-          toggleNotes,
+          isOpen,
           labelInputBoxValue,
           getNotesData,
-          getNotesDataFromAPIFn,
-          editData,
           inputTextTitleValue,
           inputSearchNotes,
           finalData,
+          noteCreationTime,
         }}
       >
         {children}

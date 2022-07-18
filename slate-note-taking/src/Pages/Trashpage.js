@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
-import { useDeleteNotesContext } from "../Components/Context/ArchiveNotesContext";
-import { useNoteTakingContext } from "../Components/Context/NotetakingContext";
-import { useTrashNotesContext } from "../Components/Context/TrashNotesContext";
-import Footer from "../Components/Footer/Footer";
-import Header from "../Components/Header/Header";
-import TrashNotesCard from "../Components/NotesCard/TrashNotesCard";
-import Sidebar from "../Components/Sidebar/Sidebar";
+import { useEffect } from "../Utils/CustomUtils";
+import { useTrashNotesContext } from "../Context/IndexAllContext";
+import {
+  Footer,
+  Header,
+  Sidebar,
+  TrashNotesCard,
+} from "../Components/IndexAllComponents";
+import { getTrashedNotesFn } from "../Services/TrashNotesServices";
 
 function Trashpage() {
-  const { getTrashedNotes, getTrashedNotesFn } = useTrashNotesContext();
+  const { getTrashedNotes, notesTrashFn } = useTrashNotesContext();
 
   useEffect(() => {
-    getTrashedNotesFn();
+    getTrashedNotesFn(notesTrashFn);
   }, []);
 
   return (
@@ -25,7 +26,7 @@ function Trashpage() {
             No notes to display in trash page, add some ..!
           </h1>
         ) : (
-          <div className="notes-container">
+          <div className="notes-container" style={{ marginTop: "5rem" }}>
             {getTrashedNotes.map((trashnotesdata) => (
               <TrashNotesCard
                 trashnotesdata={trashnotesdata}

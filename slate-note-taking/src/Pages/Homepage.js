@@ -1,41 +1,41 @@
-import React, { useEffect } from "react";
+import { React, useEffect } from "../Utils/CustomUtils";
+import { useNoteTakingContext } from "../Context/IndexAllContext";
 
-import { useNoteTakingContext } from "../Components/Context/NotetakingContext";
-import Filter from "../Components/FIlters/Filter";
-import Footer from "../Components/Footer/Footer";
-import Header from "../Components/Header/Header";
-
-import InputNotes from "../Components/InputNotes/InputNotes";
-
-import Notescard from "../Components/NotesCard/Notescard";
-import Sidebar from "../Components/Sidebar/Sidebar";
 import "./Homepage.css";
+import {
+  Filters,
+  Footer,
+  Header,
+  NotesCard,
+  NotesModal,
+  Sidebar,
+} from "../Components/IndexAllComponents";
+import { getNotesDataFromAPIFn } from "../Services/NoteTakingServices";
+
 function Homepage() {
-  const { getNotesData, finalData, toggleNotes, getNotesDataFromAPIFn } =
-    useNoteTakingContext();
+  const { finalData, notesTakingFn } = useNoteTakingContext();
 
   useEffect(() => {
-    getNotesDataFromAPIFn();
+    getNotesDataFromAPIFn(notesTakingFn);
   }, []);
   return (
     <div>
       <Header />
       <Sidebar />
-      <Filter />
-      <InputNotes />
+      <Filters />
+
       <div>
         {finalData.length <= 0 ? (
           <h1 className="header-text">
             No notes to display in Homepage , add some from
-            <span onClick={toggleNotes} className="fnpointer">
-              here
-            </span>
+            <NotesModal />
           </h1>
         ) : (
           <div className="notes-container">
-            {finalData.map((notes) => (
-              <Notescard notesData={notes} key={notes._id} />
-            ))}
+            {finalData &&
+              finalData.map((notes) => (
+                <NotesCard notesData={notes} key={notes._id} />
+              ))}
           </div>
         )}
       </div>

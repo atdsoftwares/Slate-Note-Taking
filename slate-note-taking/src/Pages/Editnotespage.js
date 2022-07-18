@@ -1,10 +1,9 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import EditForm from "../Components/EditForm/EditForm";
-import Footer from "../Components/Footer/Footer";
-import Header from "../Components/Header/Header";
-import InputNotes from "../Components/InputNotes/InputNotes";
-import Sidebar from "../Components/Sidebar/Sidebar";
+import {
+  EditForm,
+  Footer,
+  Header,
+  Sidebar,
+} from "../Components/IndexAllComponents";
 
 function Editnotespage() {
   return (
@@ -12,7 +11,6 @@ function Editnotespage() {
       <Header />
       <Sidebar />
       <EditForm />
-      <InputNotes />
       <Footer />
     </div>
   );

@@ -16,8 +16,8 @@ tr {
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 80%;
-  margin-left: 25%;
+  width: auto;
+  margin-left: 30%;
   text-align: center;
   padding: 1rem;
   border: 1px solid black;

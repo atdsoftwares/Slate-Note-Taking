@@ -7,22 +7,33 @@ function Filter() {
   useEffect(() => {
     getNotesDataFromAPIFn(notesTakingFn);
   }, []);
-  const [data, setData] = useState(getNotesData);
+  const [data, setData] = useState();
+  console.log(getNotesData);
 
   return (
     <div className="filter">
       <div className="chips-container1">
         Sort By Label:
-        <button value="All" className="chips" onClick={() => setData(data)}>
-          ALl
+        <button
+          type="text"
+          value="All"
+          className="chips"
+          onClick={() => setData(!getNotesData)}
+        >
+          All
         </button>
         {getNotesData &&
           getNotesData.map((notes) => {
             return (
               <button
+                type="text"
                 key={notes._id}
                 className="chips"
-                value={notes.labelInputBoxValue}
+                value={
+                  notes.labelInputBoxValue
+                    ? notes.labelInputBoxValue
+                    : !notes.labelInputBoxValue
+                }
                 onClick={() =>
                   notesTakingFn({
                     type: "LABELINPUTBOXVALUE",

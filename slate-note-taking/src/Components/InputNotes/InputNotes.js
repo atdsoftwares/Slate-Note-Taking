@@ -2,7 +2,7 @@ import { useNoteTakingContext } from "../../Context/IndexAllContext";
 import { addNotesintoDbFn } from "../../Services/NoteTakingServices";
 import RTEEditor from "../Editor/RTEEditor";
 import "./InputNotes.css";
-function InputNotes() {
+function InputNotes({ toggleModal }) {
   const {
     notesBgColor,
     inputTextTitleValue,
@@ -30,7 +30,7 @@ function InputNotes() {
     notesTakingFn({ type: "LABELINPUTBOXVALUE", payload: null });
     notesTakingFn({ type: "TEXTAREABOXVALUE", payload: null });
     notesTakingFn({ type: "NOTESBGCOLOR", payload: null });
-    notesTakingFn({ type: "NOTE_TAKING_MODAL", payload: !isOpen });
+    toggleModal();
   }
 
   return (

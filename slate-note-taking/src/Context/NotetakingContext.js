@@ -26,8 +26,6 @@ function NotetakingContext({ children }) {
         return { ...state, noteCreationTime: action.payload };
       case "INPUT_SEARCH_NOTES":
         return { ...state, search: action.payload };
-      case "NOTE_TAKING_MODAL":
-        return { ...state, isOpen: action.payload };
 
       default:
         return state;
@@ -48,7 +46,6 @@ function NotetakingContext({ children }) {
     notesBgColor: null,
     noteCreationTime: "",
     search: "",
-    isOpen: false,
     labelInputBoxValue: "",
   });
 
@@ -58,7 +55,6 @@ function NotetakingContext({ children }) {
     inputTextTitleValue,
     priorityRadioBoxValue,
     notesBgColor,
-    isOpen,
     labelInputBoxValue,
     getNotesData,
     inputSearchNotes,
@@ -80,6 +76,10 @@ function NotetakingContext({ children }) {
   // search by label
   const sortByCategoryFn = (getNotesData, labelInputBoxValue) => {
     const sortedproductdata = [...getNotesData];
+    if (labelInputBoxValue === 'All') {
+      
+    }
+
 
     if (labelInputBoxValue) {
       return sortedproductdata.filter(
@@ -104,7 +104,6 @@ function NotetakingContext({ children }) {
           textareaBoxValue,
           addToNotes,
           notesBgColor,
-          isOpen,
           labelInputBoxValue,
           getNotesData,
           inputTextTitleValue,

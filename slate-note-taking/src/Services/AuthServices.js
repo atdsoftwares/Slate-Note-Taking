@@ -36,5 +36,6 @@ export const signUpHandler = async (e, name, number, email, password) => {
 
 export const logoutHandler = () => {
   localStorage.clear();
+  window.location.reload();
   toast.success(`logged out `);
 };

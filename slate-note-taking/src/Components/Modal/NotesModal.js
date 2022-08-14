@@ -4,10 +4,11 @@ import InputNotes from "../InputNotes/InputNotes";
 import "./NotesModal.css";
 
 function NotesModal() {
-  const { isOpen, notesTakingFn } = useNoteTakingContext();
+  const [isOpen, setIsOpen] = useState(true);
   function toggleModal() {
-    notesTakingFn({ type: "NOTE_TAKING_MODAL", payload: !isOpen });
+    setIsOpen(!isOpen);
   }
+
   return (
     <div>
       <div onClick={toggleModal} className="">
@@ -15,12 +16,13 @@ function NotesModal() {
       </div>
       <Modal
         isOpen={!isOpen}
+        setIsOpen={setIsOpen}
         onRequestClose={toggleModal}
         contentLabel="My dialog"
         className="modal"
       >
         <div className="modal-form">
-          <InputNotes />
+          <InputNotes toggleModal={toggleModal} />
         </div>
         <button onClick={toggleModal} className="btn btn-close">
           X

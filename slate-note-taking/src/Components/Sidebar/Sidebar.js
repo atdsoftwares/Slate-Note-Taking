@@ -1,8 +1,15 @@
-import { React, NavLink as Link } from "../../Utils/CustomUtils";
+import { useNoteTakingContext } from "../../Context/NotetakingContext";
+import { getNotesDataFromAPIFn } from "../../Services/NoteTakingServices";
+import { React, NavLink as Link, useEffect } from "../../Utils/CustomUtils";
 import NotesModal from "../Modal/NotesModal";
 import "./Sidebar.css";
 
 function Sidebar() {
+  const { getNotesData, notesTakingFn } = useNoteTakingContext();
+  useEffect(() => {
+    getNotesDataFromAPIFn(notesTakingFn);
+  }, []);
+
   return (
     <div>
       <aside className="aside">
@@ -32,6 +39,18 @@ function Sidebar() {
             Trash
           </div>
         </Link>
+
+        {getNotesData.map((notes) => (
+          <Link to={`/Labels/${notes.labelInputBoxValue}`}>
+            <div className="watchlater">
+              <span className="material-icons sidebarmi" title="History">
+                label
+              </span>{" "}
+              {notes && notes.labelInputBoxValue}
+            </div>
+          </Link>
+        ))}
+
         <Link to="/accounts">
           <div className="watchlater">
             <span className="material-icons sidebarmi" title="History">

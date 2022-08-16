@@ -13,7 +13,7 @@ import {
 import { getNotesDataFromAPIFn } from "../Services/NoteTakingServices";
 
 function Homepage() {
-  const { finalData, notesTakingFn } = useNoteTakingContext();
+  const { finalData, notesTakingFn, priorityData } = useNoteTakingContext();
 
   useEffect(() => {
     getNotesDataFromAPIFn(notesTakingFn);
@@ -32,8 +32,13 @@ function Homepage() {
           </h1>
         ) : (
           <div className="notes-container">
-            {finalData &&
+            {/* {finalData &&
               finalData.map((notes) => (
+                <NotesCard notesData={notes} key={notes._id} />
+              ))} */}
+
+            {priorityData &&
+              priorityData.map((notes) => (
                 <NotesCard notesData={notes} key={notes._id} />
               ))}
           </div>

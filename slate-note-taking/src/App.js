@@ -6,6 +6,7 @@ import {
   Archivespage,
   Editnotespage,
   Homepage,
+  Labelpage,
   Loginpage,
   Signuppage,
   Trashpage,
@@ -53,6 +54,17 @@ function App() {
             </Auth>
           }
         />
+
+        <Route
+          exact
+          path="/labels/:label"
+          element={
+            <Auth>
+              <Labelpage />
+            </Auth>
+          }
+        />
+
         <Route exact path="/login" element={<Loginpage />} />
         <Route exact path="/signup" element={<Signuppage />} />
         <Route

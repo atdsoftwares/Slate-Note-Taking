@@ -1,31 +1,29 @@
 .filter {
-  width: 82%;
-  height: auto;
-  background-color: rgb(190, 190, 190);
-  margin-top: 10rem;
+  margin-top: 5rem;
   margin-left: 17%;
   border-radius: 0.3rem;
+  background-color: #cecece;
+  width: 80%;
+  padding: 0.3rem;
 }
-
-.chips-container1 {
+select {
+  height: 2rem;
+  border-radius: 0.3rem;
+  border: 1px solid #cecece;
+  padding: 0.3rem;
+  outline: none;
+}
+option {
+  width: 10%;
+  height: auto;
+  background-color: #ffffff;
+  color: rgb(140, 140, 140);
+  font-size: 1rem;
+  border-radius: 0.3rem;
+}
+.priority,
+.tag {
   display: flex;
-  justify-content: flex-start;
+  justify-content: start;
   align-items: center;
-  width: 99%;
-  max-width: auto;
-  margin-left: 1rem;
-  margin-top: -4.5rem;
-}
-button.chips:focus {
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-button.chips {
-  background-color: white;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 0.5rem;
-  padding: 0.2rem;
 }

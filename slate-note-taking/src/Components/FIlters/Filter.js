@@ -3,10 +3,7 @@ import { useNoteTakingContext } from "../../Context/IndexAllContext";
 import "./Filter.css";
 function Filter() {
   const { notesTakingFn, priorityLabel } = useNoteTakingContext();
-  console.log(
-    "🚀 ~ file: Filter.js ~ line 6 ~ Filter ~ priorityLabel",
-    priorityLabel
-  );
+
   return (
     <div>
       <div className="filter">

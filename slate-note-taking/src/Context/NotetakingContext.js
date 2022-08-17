@@ -26,6 +26,8 @@ function NotetakingContext({ children }) {
         return { ...state, noteCreationTime: action.payload };
       case "INPUT_SEARCH_NOTES":
         return { ...state, search: action.payload };
+      case "GET_LABELED_NOTES":
+        return { ...state, getLabeledNotes: action.payload };
       case "PRIORITY_LABEL":
         return { ...state, priorityLabel: action.payload };
 
@@ -87,6 +89,7 @@ function NotetakingContext({ children }) {
     search: "",
     labelInputBoxValue: "",
     priorityLabel: "",
+    getLabeledNotes: [],
     priorityRadioBoxValue: {
       low: false,
       medium: false,
@@ -105,6 +108,7 @@ function NotetakingContext({ children }) {
     inputSearchNotes,
     search,
     priorityLabel,
+    getLabeledNotes,
   } = state;
 
   // search filter
@@ -182,6 +186,7 @@ function NotetakingContext({ children }) {
           noteCreationTime,
           priorityData,
           priorityLabel,
+          getLabeledNotes,
         }}
       >
         {children}

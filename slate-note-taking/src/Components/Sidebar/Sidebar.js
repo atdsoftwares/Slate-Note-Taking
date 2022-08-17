@@ -40,16 +40,18 @@ function Sidebar() {
           </div>
         </Link>
 
-        {getNotesData.map((notes) => (
-          <Link to={`/Labels/${notes.labelInputBoxValue}`}>
-            <div className="watchlater">
-              <span className="material-icons sidebarmi" title="History">
-                label
-              </span>{" "}
-              {notes && notes.labelInputBoxValue}
-            </div>
-          </Link>
-        ))}
+        {getNotesData &&
+          getNotesData.map((notes) => (
+            <Link to={`/${notes.labelInputBoxValue}`}>
+              {console.log(notes.labelInputBoxValue)}
+              <div className="watchlater">
+                <span className="material-icons sidebarmi" title="History">
+                  label
+                </span>
+                {notes && notes.labelInputBoxValue}
+              </div>
+            </Link>
+          ))}
 
         <Link to="/accounts">
           <div className="watchlater">

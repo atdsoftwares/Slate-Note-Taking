@@ -14,6 +14,10 @@ import { getNotesDataFromAPIFn } from "../Services/NoteTakingServices";
 
 function Homepage() {
   const { finalData, notesTakingFn, priorityData } = useNoteTakingContext();
+  console.log(
+    "🚀 ~ file: Homepage.js ~ line 17 ~ Homepage ~ priorityData",
+    priorityData
+  );
 
   useEffect(() => {
     getNotesDataFromAPIFn(notesTakingFn);

@@ -57,7 +57,7 @@ function App() {
 
         <Route
           exact
-          path="/labels/:label"
+          path="/:label"
           element={
             <Auth>
               <Labelpage />

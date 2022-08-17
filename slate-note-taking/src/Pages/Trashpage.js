@@ -20,19 +20,19 @@ function Trashpage() {
       <Header />
       <Sidebar />
       <div>
-        {getTrashedNotes.length <= 0 ? (
+        {getTrashedNotes && getTrashedNotes.length <= 0 ? (
           <h1 className="header-text">
-            {" "}
             No notes to display in trash page, add some ..!
           </h1>
         ) : (
           <div className="notes-container" style={{ marginTop: "5rem" }}>
-            {getTrashedNotes.map((trashnotesdata) => (
-              <TrashNotesCard
-                trashnotesdata={trashnotesdata}
-                key={trashnotesdata._id}
-              />
-            ))}
+            {getTrashedNotes &&
+              getTrashedNotes.map((trashnotesdata) => (
+                <TrashNotesCard
+                  trashnotesdata={trashnotesdata}
+                  key={trashnotesdata._id}
+                />
+              ))}
           </div>
         )}
       </div>

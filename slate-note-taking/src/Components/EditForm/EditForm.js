@@ -16,7 +16,6 @@ function EditForm() {
     textareaBoxValue,
     labelInputBoxValue,
     inputTextTitleValue,
-    isOpen,
   } = useNoteTakingContext();
 
   const noteCreatedAt = new Date();
@@ -60,7 +59,6 @@ function EditForm() {
     notesTakingFn({ type: "LABELINPUTBOXVALUE", payload: null });
     notesTakingFn({ type: "TEXTAREABOXVALUE", payload: "" });
     notesTakingFn({ type: "NOTESBGCOLOR", payload: null });
-    notesTakingFn({ type: "NOTE_TAKING_MODAL", payload: !isOpen });
   }
 
   useEffect(() => {

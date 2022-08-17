@@ -26,9 +26,48 @@ function NotetakingContext({ children }) {
         return { ...state, noteCreationTime: action.payload };
       case "INPUT_SEARCH_NOTES":
         return { ...state, search: action.payload };
-      case "NOTE_TAKING_MODAL":
-        return { ...state, isOpen: action.payload };
+      case "GET_LABELED_NOTES":
+        return { ...state, getLabeledNotes: action.payload };
+      case "PRIORITY_LABEL":
+        return { ...state, priorityLabel: action.payload };
 
+      case "low":
+        return {
+          ...state,
+          priorityRadioBoxValue: {
+            ...state["priorityRadioBoxValue"],
+            low: !state.priorityRadioBoxValue.low,
+          },
+        };
+
+      case "top":
+        return {
+          ...state,
+          priorityRadioBoxValue: {
+            ...state["priorityRadioBoxValue"],
+            top: !state.priorityRadioBoxValue.top,
+          },
+        };
+
+      case "medium":
+        return {
+          ...state,
+          priorityRadioBoxValue: {
+            ...state["priorityRadioBoxValue"],
+            medium: !state.priorityRadioBoxValue.medium,
+          },
+        };
+      case "All": {
+        return {
+          ...state,
+          priorityRadioBoxValue: {
+            ...state["priorityRadioBoxValue"],
+            top: false,
+            low: false,
+            medium: false,
+          },
+        };
+      }
       default:
         return state;
     }
@@ -43,13 +82,19 @@ function NotetakingContext({ children }) {
     postNotesData: [],
     addToNotes: [],
     inputTextTitleValue: null,
-    priorityRadioBoxValue: null,
+    // priorityRadioBoxValue: "",
     textareaBoxValue: null,
     notesBgColor: null,
     noteCreationTime: "",
     search: "",
-    isOpen: false,
     labelInputBoxValue: "",
+    priorityLabel: "",
+    getLabeledNotes: [],
+    priorityRadioBoxValue: {
+      low: false,
+      medium: false,
+      top: false,
+    },
   });
 
   const {
@@ -58,11 +103,12 @@ function NotetakingContext({ children }) {
     inputTextTitleValue,
     priorityRadioBoxValue,
     notesBgColor,
-    isOpen,
     labelInputBoxValue,
     getNotesData,
     inputSearchNotes,
     search,
+    priorityLabel,
+    getLabeledNotes,
   } = state;
 
   // search filter
@@ -72,27 +118,55 @@ function NotetakingContext({ children }) {
       return sortedproductdata.filter((s) =>
         s.inputTextTitleValue.toLowerCase().includes(search)
       );
-    } else {
-      return sortedproductdata;
     }
+    return sortedproductdata;
   }
 
-  // search by label
-  const sortByCategoryFn = (getNotesData, labelInputBoxValue) => {
+  // search by priority
+
+  const searchByPriorityFn = (getNotesData, priorityRadioBoxValue) => {
     const sortedproductdata = [...getNotesData];
 
-    if (labelInputBoxValue) {
-      return sortedproductdata.filter(
-        (notes) => notes.labelInputBoxValue === labelInputBoxValue
+    if (priorityLabel === "top") {
+      return getNotesData.filter(
+        (notes) => notes.priorityRadioBoxValue === "top"
+      );
+    }
+    if (priorityLabel === "medium") {
+      return getNotesData.filter(
+        (notes) => notes.priorityRadioBoxValue === "medium"
+      );
+    }
+
+    if (priorityLabel === "low") {
+      return getNotesData.filter(
+        (notes) => notes.priorityRadioBoxValue === "low"
+      );
+    }
+
+    if (priorityLabel === "All") {
+      return getNotesData.filter(
+        (notes) => notes.priorityRadioBoxValue !== "low" && "medium" && "high"
       );
     }
 
     return sortedproductdata;
   };
 
+  // search by label
+  const sortByCategoryFn = (getNotesData, labelInputBoxValue) => {
+    const sortedproductdata = [...getNotesData];
+    if (labelInputBoxValue) {
+      return sortedproductdata.filter(
+        (notes) => notes.labelInputBoxValue === labelInputBoxValue
+      );
+    }
+    return sortedproductdata;
+  };
+
   const sortedData = sortByCategoryFn(getNotesData, labelInputBoxValue);
   const finalData = sortyBySearchFn(sortedData, search);
-  // const finalData = sortyBySearchFn(getNotesData, search);
+  const priorityData = searchByPriorityFn(finalData, priorityRadioBoxValue);
 
   return (
     <div>
@@ -104,13 +178,15 @@ function NotetakingContext({ children }) {
           textareaBoxValue,
           addToNotes,
           notesBgColor,
-          isOpen,
           labelInputBoxValue,
           getNotesData,
           inputTextTitleValue,
           inputSearchNotes,
           finalData,
           noteCreationTime,
+          priorityData,
+          priorityLabel,
+          getLabeledNotes,
         }}
       >
         {children}

@@ -1,39 +1,57 @@
-import { React, useEffect, useState } from "../../Utils/CustomUtils";
+import { React } from "../../Utils/CustomUtils";
 import { useNoteTakingContext } from "../../Context/IndexAllContext";
 import "./Filter.css";
-import { getNotesDataFromAPIFn } from "../../Services/NoteTakingServices";
 function Filter() {
-  const { getNotesData, notesTakingFn } = useNoteTakingContext();
-  useEffect(() => {
-    getNotesDataFromAPIFn(notesTakingFn);
-  }, []);
-  const [data, setData] = useState(getNotesData);
+  const { notesTakingFn, priorityLabel } = useNoteTakingContext();
 
   return (
-    <div className="filter">
-      <div className="chips-container1">
-        Sort By Label:
-        <button value="All" className="chips" onClick={() => setData(data)}>
-          ALl
-        </button>
-        {getNotesData &&
-          getNotesData.map((notes) => {
-            return (
-              <button
-                key={notes._id}
-                className="chips"
-                value={notes.labelInputBoxValue}
-                onClick={() =>
-                  notesTakingFn({
-                    type: "LABELINPUTBOXVALUE",
-                    payload: notes.labelInputBoxValue,
-                  })
-                }
-              >
-                {notes.labelInputBoxValue}
-              </button>
-            );
-          })}
+    <div>
+      <div className="filter">
+        <div className="priority">
+          <label for="priority" className="tag">
+            <b>Priority</b>
+            <span className="material-icons">tag</span>:
+          </label>
+          <select
+            name="priority"
+            onChange={(e) =>
+              notesTakingFn({ type: "PRIORITY_LABEL", payload: e.target.value })
+            }
+          >
+            <option value="All" onChange={() => notesTakingFn({ type: "All" })}>
+              All
+            </option>
+            <option value="top" onChange={() => notesTakingFn({ type: "top" })}>
+              Top
+            </option>
+            <option
+              value="medium"
+              onChange={() => notesTakingFn({ type: "medium" })}
+            >
+              Medium
+            </option>
+            <option value="low" onChange={() => notesTakingFn({ type: "low" })}>
+              Low
+            </option>
+          </select>
+
+          {/* <div className="radio-values">
+            <input
+              type="radio"
+              value="Low-To-High"
+              name="radio-filter"
+              className="radio-values-filter"
+            />
+            Low to High
+            <input
+              type="radio"
+              value="Low-To-High"
+              name="radio-filter"
+              className="radio-values-filter"
+            />
+            High to Low
+          </div> */}
+        </div>
       </div>
     </div>
   );

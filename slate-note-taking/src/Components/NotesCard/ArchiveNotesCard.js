@@ -19,7 +19,7 @@ function ArchiveNotesCard({ archivenotesdata }) {
   return (
     <div style={{ margin: "0.5rem" }}>
       <div className="notes-card" style={{ backgroundColor: notesBgColor }}>
-        <h2> {inputTextTitleValue}</h2>
+        <h3 className="input-text-value"> {inputTextTitleValue}</h3>
         <div
           dangerouslySetInnerHTML={{ __html: textareaBoxValue }}
           className="title"

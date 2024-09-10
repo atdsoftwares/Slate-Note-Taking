@@ -1,11 +1,11 @@
 import { React, useEffect } from "../Utils/CustomUtils";
 import { useNoteTakingContext } from "../Context/IndexAllContext";
 
-import "./Homepage.css";
 import {
   Filters,
   Footer,
   Header,
+  InputNotes,
   NotesCard,
   NotesModal,
   Sidebar,
@@ -28,7 +28,7 @@ function Homepage() {
       <Sidebar />
       <Filters />
 
-      <div>
+      <div className="flex justify-center items-center absolute top-40 left-64">
         {finalData.length <= 0 ? (
           <h1 className="header-text">
             No notes to display in Homepage , add some from
@@ -36,11 +36,6 @@ function Homepage() {
           </h1>
         ) : (
           <div className="notes-container">
-            {/* {finalData &&
-              finalData.map((notes) => (
-                <NotesCard notesData={notes} key={notes._id} />
-              ))} */}
-
             {priorityData &&
               priorityData.map((notes) => (
                 <NotesCard notesData={notes} key={notes._id} />
@@ -48,7 +43,7 @@ function Homepage() {
           </div>
         )}
       </div>
-
+      {/* <InputNotes /> */}
       <Footer />
     </div>
   );
